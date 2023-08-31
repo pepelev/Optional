@@ -30,7 +30,7 @@ jobs:
       id: publish_nuget
       uses: rohith/publish-nuget@v2
       with:
-        PROJECT_FILE_PATH: Optional/Optional.csproj
+        PROJECT_FILE_PATH: src/Optional/Optional.csproj
         VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
         TAG_COMMIT: true
         TAG_FORMAT: v*
