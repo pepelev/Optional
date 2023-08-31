@@ -13,14 +13,18 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net35' ">
     <DefineConstants>NET35</DefineConstants>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
     <DefineConstants>NETSTANDARD10</DefineConstants>
   </PropertyGroup>
-    
+
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter" Version="1.1.18" />
     <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net6' ">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
   </ItemGroup>
 
   <ItemGroup>
