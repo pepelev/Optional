@@ -24,7 +24,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Test
-      run: dotnet test --no-restore --no-build --verbosity normal Optional.Tests
+      run: dotnet test --configuration Release --no-restore --no-build --verbosity normal Optional.Tests
 
     - name: Publish on version change
       id: publish_nuget
