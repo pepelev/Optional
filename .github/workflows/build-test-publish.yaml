@@ -2,7 +2,7 @@ name: Build, test and publish
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 defaults:
   run:
     working-directory: src
