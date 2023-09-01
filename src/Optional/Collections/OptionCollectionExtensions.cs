@@ -120,12 +120,10 @@ namespace Optional.Collections
 #endif
             else
             {
-                using (var enumerator = source.GetEnumerator())
+                using var enumerator = source.GetEnumerator();
+                if (enumerator.MoveNext())
                 {
-                    if (enumerator.MoveNext())
-                    {
-                        return enumerator.Current.Some();
-                    }
+                    return enumerator.Current.Some();
                 }
             }
 
@@ -184,18 +182,16 @@ namespace Optional.Collections
 #endif
             else
             {
-                using (var enumerator = source.GetEnumerator())
+                using var enumerator = source.GetEnumerator();
+                if (enumerator.MoveNext())
                 {
-                    if (enumerator.MoveNext())
+                    TSource result;
+                    do
                     {
-                        TSource result;
-                        do
-                        {
-                            result = enumerator.Current;
-                        } while (enumerator.MoveNext());
+                        result = enumerator.Current;
+                    } while (enumerator.MoveNext());
 
-                        return result.Some();
-                    }
+                    return result.Some();
                 }
             }
 
@@ -240,24 +236,22 @@ namespace Optional.Collections
 #endif
             else
             {
-                using (var enumerator = source.GetEnumerator())
+                using var enumerator = source.GetEnumerator();
+                while (enumerator.MoveNext())
                 {
-                    while (enumerator.MoveNext())
+                    var result = enumerator.Current;
+                    if (predicate(result))
                     {
-                        var result = enumerator.Current;
-                        if (predicate(result))
+                        while (enumerator.MoveNext())
                         {
-                            while (enumerator.MoveNext())
+                            var element = enumerator.Current;
+                            if (predicate(element))
                             {
-                                var element = enumerator.Current;
-                                if (predicate(element))
-                                {
-                                    result = element;
-                                }
+                                result = element;
                             }
-
-                            return result.Some();
                         }
+
+                        return result.Some();
                     }
                 }
             }
@@ -295,18 +289,16 @@ namespace Optional.Collections
 #endif
             else
             {
-                using (var enumerator = source.GetEnumerator())
+                using var enumerator = source.GetEnumerator();
+                if (!enumerator.MoveNext())
                 {
-                    if (!enumerator.MoveNext())
-                    {
-                        return Option.None<TSource>();
-                    }
+                    return Option.None<TSource>();
+                }
 
-                    var result = enumerator.Current;
-                    if (!enumerator.MoveNext())
-                    {
-                        return result.Some();
-                    }
+                var result = enumerator.Current;
+                if (!enumerator.MoveNext())
+                {
+                    return result.Some();
                 }
             }
 
@@ -378,17 +370,15 @@ namespace Optional.Collections
 #endif
                 else
                 {
-                    using (var enumerator = source.GetEnumerator())
+                    using var enumerator = source.GetEnumerator();
+                    while (enumerator.MoveNext())
                     {
-                        while (enumerator.MoveNext())
+                        if (index == 0)
                         {
-                            if (index == 0)
-                            {
-                                return enumerator.Current.Some();
-                            }
-
-                            index--;
+                            return enumerator.Current.Some();
                         }
+
+                        index--;
                     }
                 }
             }
