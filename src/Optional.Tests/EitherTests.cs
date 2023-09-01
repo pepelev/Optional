@@ -850,10 +850,10 @@ namespace Optional.Tests
             Assert.IsFalse(someNullableNull.NotNull(-1).HasValue);
             Assert.AreEqual(someNullableNull.NotNull(-1).ValueOrException(), -1);
 
-            var someStructNull = Option.Some<int, int>(default(int));
+            var someStructNull = Option.Some<int, int>(default);
             Assert.IsTrue(someStructNull.HasValue);
             Assert.IsTrue(someStructNull.NotNull(-1).HasValue);
-            Assert.AreEqual(someStructNull.NotNull(-1).ValueOrException(), default(int));
+            Assert.AreEqual(someStructNull.NotNull(-1).ValueOrException(), default);
 
             Assert.IsTrue(some.HasValue);
             Assert.IsTrue(some.NotNull("ex").HasValue);
@@ -918,10 +918,10 @@ namespace Optional.Tests
             Assert.IsFalse(someNullableNull.NotNull(() => -1).HasValue);
             Assert.AreEqual(someNullableNull.NotNull(() => -1).ValueOrException(), -1);
 
-            var someStructNull = Option.Some<int, int>(default(int));
+            var someStructNull = Option.Some<int, int>(default);
             Assert.IsTrue(someStructNull.HasValue);
             Assert.IsTrue(someStructNull.NotNull(() => -1).HasValue);
-            Assert.AreEqual(someStructNull.NotNull(() => -1).ValueOrException(), default(int));
+            Assert.AreEqual(someStructNull.NotNull(() => -1).ValueOrException(), default);
 
             Assert.IsTrue(some.HasValue);
             Assert.IsTrue(some.NotNull(() => "ex").HasValue);
@@ -1051,9 +1051,9 @@ namespace Optional.Tests
             Assert.IsFalse(none2.HasValue);
             Assert.IsFalse(none3.HasValue);
 
-            Assert.AreEqual(none1.ValueOrException(), default(int));
-            Assert.AreEqual(none2.ValueOrException(), default(int?));
-            Assert.AreEqual(none3.ValueOrException(), default(string));
+            Assert.AreEqual(none1.ValueOrException(), default);
+            Assert.AreEqual(none2.ValueOrException(), default);
+            Assert.AreEqual(none3.ValueOrException(), default);
 
             var noneWithEx1 = none1.MapException(x => -1);
             var noneWithEx2 = none2.MapException(x => (int?)-1);

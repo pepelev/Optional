@@ -16,7 +16,7 @@ namespace Optional.Unsafe
                 return option.Value;
             }
 
-            return default(T?);
+            return null;
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Optional.Unsafe
                 return option.Value;
             }
 
-            return default(T?);
+            return default;
         }
 
         /// <summary>
