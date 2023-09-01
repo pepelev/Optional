@@ -154,20 +154,14 @@ namespace Optional
         {
             if (HasValue)
             {
-                if (value == null)
-                {
-                    return "Some(null)";
-                }
-
-                return string.Format("Some({0})", value);
+                return value == null
+                    ? "Some(null)"
+                    : $"Some({value})";
             }
 
-            if (exception == null)
-            {
-                return "None(null)";
-            }
-
-            return string.Format("None({0})", exception);
+            return exception == null
+                ? "None(null)"
+                : $"None({exception})";
         }
 
         /// <summary>
