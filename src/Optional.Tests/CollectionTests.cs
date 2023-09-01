@@ -34,7 +34,6 @@ namespace Optional.Tests
             var list4 = new List<Option<string>> { Option.None<string>() };
             var list4Expected = new List<string>();
 
-
             CollectionAssert.AreEqual(list1.Values().ToList(), list1Expected);
             CollectionAssert.AreEqual(list2.Values().ToList(), list2Expected);
             CollectionAssert.AreEqual(list3.Values().ToList(), list3Expected);
@@ -65,7 +64,6 @@ namespace Optional.Tests
             var list4 = new List<Option<string, string>> { Option.None<string, string>("error") };
             var list4Expected = new List<string>();
 
-
             CollectionAssert.AreEqual(list1.Values().ToList(), list1Expected);
             CollectionAssert.AreEqual(list2.Values().ToList(), list2Expected);
             CollectionAssert.AreEqual(list3.Values().ToList(), list3Expected);
@@ -95,7 +93,6 @@ namespace Optional.Tests
 
             var list4 = new List<Option<string, string>> { Option.Some<string, string>("error") };
             var list4Expected = new List<string>();
-
 
             CollectionAssert.AreEqual(list1.Exceptions().ToList(), list1Expected);
             CollectionAssert.AreEqual(list2.Exceptions().ToList(), list2Expected);

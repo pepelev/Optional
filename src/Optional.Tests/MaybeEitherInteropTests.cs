@@ -28,11 +28,13 @@ namespace Optional.Tests
             var someMaybe = Option.Some("val");
 
             Assert.AreEqual(noneMaybe.WithException(() => "ex").ValueOrException(), "ex");
-            Assert.AreEqual(someMaybe.WithException(() =>
-                {
-                    Assert.Fail();
-                    return "ex";
-                }).ValueOrException(),
+            Assert.AreEqual(
+                someMaybe.WithException(
+                    () =>
+                    {
+                        Assert.Fail();
+                        return "ex";
+                    }).ValueOrException(),
                 "val");
         }
 
@@ -70,14 +72,18 @@ namespace Optional.Tests
             Assert.AreEqual(noneEither.FlatMap(val => Option.None<string>(), () => "ex1"), noneEither);
             Assert.AreEqual(noneEither.FlatMap(val => Option.Some("val"), () => "ex1"), noneEither);
             Assert.AreEqual(someEither.FlatMap(val => Option.None<string>(), () => "ex"), noneEither);
-            Assert.AreEqual(someEither.FlatMap(val => Option.Some("val"),
+            Assert.AreEqual(
+                someEither.FlatMap(
+                    val => Option.Some("val"),
                     () =>
                     {
                         Assert.Fail();
                         return "ex";
                     }),
                 someEither);
-            Assert.AreEqual(someEither.FlatMap(val => Option.Some("val1"),
+            Assert.AreEqual(
+                someEither.FlatMap(
+                    val => Option.Some("val1"),
                     () =>
                     {
                         Assert.Fail();

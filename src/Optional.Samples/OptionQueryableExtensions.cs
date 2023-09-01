@@ -13,10 +13,15 @@ namespace Optional.Samples
         /// <returns>An Option&lt;T&gt; instance containing the first element if present.</returns>
         public static Option<TSource> FirstOrNone<TSource>(this IQueryable<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
 
             var result = source.Select(val => new { Value = val }).FirstOrDefault();
-            return result != null ? result.Value.Some() : Option.None<TSource>();
+            return result != null
+                ? result.Value.Some()
+                : Option.None<TSource>();
         }
 
         /// <summary>
@@ -28,11 +33,20 @@ namespace Optional.Samples
         /// <returns>An Option&lt;T&gt; instance containing the first element if present.</returns>
         public static Option<TSource> FirstOrNone<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
 
             var result = source.Where(predicate).Select(val => new { Value = val }).FirstOrDefault();
-            return result != null ? result.Value.Some() : Option.None<TSource>();
+            return result != null
+                ? result.Value.Some()
+                : Option.None<TSource>();
         }
 
         /// <summary>
@@ -42,10 +56,15 @@ namespace Optional.Samples
         /// <returns>An Option&lt;T&gt; instance containing the last element if present.</returns>
         public static Option<TSource> LastOrNone<TSource>(this IQueryable<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
 
             var result = source.Select(val => new { Value = val }).LastOrDefault();
-            return result != null ? result.Value.Some() : Option.None<TSource>();
+            return result != null
+                ? result.Value.Some()
+                : Option.None<TSource>();
         }
 
         /// <summary>
@@ -57,11 +76,20 @@ namespace Optional.Samples
         /// <returns>An Option&lt;T&gt; instance containing the last element if present.</returns>
         public static Option<TSource> LastOrNone<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
 
             var result = source.Where(predicate).Select(val => new { Value = val }).LastOrDefault();
-            return result != null ? result.Value.Some() : Option.None<TSource>();
+            return result != null
+                ? result.Value.Some()
+                : Option.None<TSource>();
         }
 
         /// <summary>
@@ -72,12 +100,17 @@ namespace Optional.Samples
         /// <returns>An Option&lt;T&gt; instance containing the element if present.</returns>
         public static Option<TSource> SingleOrNone<TSource>(this IQueryable<TSource> source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
 
             try
             {
                 var result = source.Select(val => new { Value = val }).SingleOrDefault();
-                return result != null ? result.Value.Some() : Option.None<TSource>();
+                return result != null
+                    ? result.Value.Some()
+                    : Option.None<TSource>();
             }
             catch (InvalidOperationException)
             {
@@ -94,13 +127,22 @@ namespace Optional.Samples
         /// <returns>An Option&lt;T&gt; instance containing the element if present.</returns>
         public static Option<TSource> SingleOrNone<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (predicate == null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
 
             try
             {
                 var result = source.Where(predicate).Select(val => new { Value = val }).SingleOrDefault();
-                return result != null ? result.Value.Some() : Option.None<TSource>();
+                return result != null
+                    ? result.Value.Some()
+                    : Option.None<TSource>();
             }
             catch (InvalidOperationException)
             {
@@ -116,10 +158,15 @@ namespace Optional.Samples
         /// <returns>An Option&lt;T&gt; instance containing the element if found.</returns>
         public static Option<TSource> ElementAtOrNone<TSource>(this IQueryable<TSource> source, int index)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
 
             var result = source.Select(val => new { Value = val }).ElementAtOrDefault(index);
-            return result != null ? result.Value.Some() : Option.None<TSource>();
+            return result != null
+                ? result.Value.Some()
+                : Option.None<TSource>();
         }
     }
 }
