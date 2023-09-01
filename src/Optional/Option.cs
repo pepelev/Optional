@@ -1,4 +1,8 @@
-﻿namespace Optional;
+#if NET7_0
+using System;
+#endif
+
+namespace Optional;
 
 /// <summary>
 ///     Provides a set of functions for creating optional values.
@@ -34,4 +38,19 @@ public static class Option
     /// <returns>An empty optional.</returns>
     public static Option<T, TException> None<T, TException>(TException exception) =>
         new(value: default!, exception, hasValue: false);
+
+#if NET7_0
+    public static Option<T> Parse<T>(ReadOnlySpan<char> argument, IFormatProvider? formatProvider)
+        where T : ISpanParsable<T> =>
+        T.TryParse(argument, formatProvider, out var result)
+            ? result.Some()
+            : None<T>();
+
+    public static Option<T> Parse<T>(string? argument, IFormatProvider? formatProvider)
+        where T : IParsable<T> =>
+        T.TryParse(argument, formatProvider, out var result)
+            ? result.Some()
+            : None<T>();
+
+#endif
 }
