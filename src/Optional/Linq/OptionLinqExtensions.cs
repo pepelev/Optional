@@ -17,9 +17,9 @@ namespace Optional.Linq
         }
 
         public static Option<TResult> SelectMany<TSource, TCollection, TResult>(
-                this Option<TSource> source,
-                Func<TSource, Option<TCollection>> collectionSelector,
-                Func<TSource, TCollection, TResult> resultSelector)
+            this Option<TSource> source,
+            Func<TSource, Option<TCollection>> collectionSelector,
+            Func<TSource, TCollection, TResult> resultSelector)
         {
             if (collectionSelector == null) throw new ArgumentNullException(nameof(collectionSelector));
             if (resultSelector == null) throw new ArgumentNullException(nameof(resultSelector));
@@ -39,8 +39,8 @@ namespace Optional.Linq
         }
 
         public static Option<TResult, TException> SelectMany<TSource, TException, TResult>(
-                this Option<TSource, TException> source,
-                Func<TSource,
+            this Option<TSource, TException> source,
+            Func<TSource,
                 Option<TResult, TException>> selector)
         {
             if (selector == null) throw new ArgumentNullException(nameof(selector));
@@ -48,9 +48,9 @@ namespace Optional.Linq
         }
 
         public static Option<TResult, TException> SelectMany<TSource, TException, TCollection, TResult>(
-                this Option<TSource, TException> source,
-                Func<TSource, Option<TCollection, TException>> collectionSelector,
-                Func<TSource, TCollection, TResult> resultSelector)
+            this Option<TSource, TException> source,
+            Func<TSource, Option<TCollection, TException>> collectionSelector,
+            Func<TSource, TCollection, TResult> resultSelector)
         {
             if (collectionSelector == null) throw new ArgumentNullException(nameof(collectionSelector));
             if (resultSelector == null) throw new ArgumentNullException(nameof(resultSelector));

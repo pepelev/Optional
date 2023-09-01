@@ -2,16 +2,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Optional.Collections
 {
     public static class OptionCollectionExtensions
     {
-
         /// <summary>
-        /// Flattens a sequence of optionals into a sequence containing all inner values.
-        /// Empty elements are discarded.
+        ///     Flattens a sequence of optionals into a sequence containing all inner values.
+        ///     Empty elements are discarded.
         /// </summary>
         /// <param name="source">The sequence of optionals.</param>
         /// <returns>A flattened sequence of values.</returns>
@@ -29,8 +27,8 @@ namespace Optional.Collections
         }
 
         /// <summary>
-        /// Flattens a sequence of optionals into a sequence containing all inner values.
-        /// Empty elements and their exceptional values are discarded.
+        ///     Flattens a sequence of optionals into a sequence containing all inner values.
+        ///     Empty elements and their exceptional values are discarded.
         /// </summary>
         /// <param name="source">The sequence of optionals.</param>
         /// <returns>A flattened sequence of values.</returns>
@@ -48,8 +46,8 @@ namespace Optional.Collections
         }
 
         /// <summary>
-        /// Flattens a sequence of optionals into a sequence containing all exceptional values.
-        /// Non-empty elements and their values are discarded.
+        ///     Flattens a sequence of optionals into a sequence containing all exceptional values.
+        ///     Non-empty elements and their values are discarded.
         /// </summary>
         /// <param name="source">The sequence of optionals.</param>
         /// <returns>A flattened sequence of exceptional values.</returns>
@@ -67,9 +65,9 @@ namespace Optional.Collections
         }
 
         /// <summary>
-        /// Returns the value associated with the specified key if such exists.
-        /// A dictionary lookup will be used if available, otherwise falling
-        /// back to a linear scan of the enumerable.
+        ///     Returns the value associated with the specified key if such exists.
+        ///     A dictionary lookup will be used if available, otherwise falling
+        ///     back to a linear scan of the enumerable.
         /// </summary>
         /// <param name="source">The dictionary or enumerable in which to locate the key.</param>
         /// <param name="key">The key to locate.</param>
@@ -83,7 +81,8 @@ namespace Optional.Collections
                 return dictionary.TryGetValue(key, out var value) ? value.Some() : value.None();
             }
 #if !NET35
-            else if (source is IReadOnlyDictionary<TKey, TValue> readOnlyDictionary)
+
+            if (source is IReadOnlyDictionary<TKey, TValue> readOnlyDictionary)
             {
                 return readOnlyDictionary.TryGetValue(key, out var value) ? value.Some() : value.None();
             }
@@ -95,7 +94,7 @@ namespace Optional.Collections
         }
 
         /// <summary>
-        /// Returns the first element of a sequence if such exists.
+        ///     Returns the first element of a sequence if such exists.
         /// </summary>
         /// <param name="source">The sequence to return the first element from.</param>
         /// <returns>An Option&lt;T&gt; instance containing the first element if present.</returns>
@@ -134,8 +133,8 @@ namespace Optional.Collections
         }
 
         /// <summary>
-        /// Returns the first element of a sequence, satisfying a specified predicate, 
-        /// if such exists.
+        ///     Returns the first element of a sequence, satisfying a specified predicate,
+        ///     if such exists.
         /// </summary>
         /// <param name="source">The sequence to return the first element from.</param>
         /// <param name="predicate">The predicate to filter by.</param>
@@ -157,7 +156,7 @@ namespace Optional.Collections
         }
 
         /// <summary>
-        /// Returns the last element of a sequence if such exists.
+        ///     Returns the last element of a sequence if such exists.
         /// </summary>
         /// <param name="source">The sequence to return the last element from.</param>
         /// <returns>An Option&lt;T&gt; instance containing the last element if present.</returns>
@@ -193,8 +192,7 @@ namespace Optional.Collections
                         do
                         {
                             result = enumerator.Current;
-                        }
-                        while (enumerator.MoveNext());
+                        } while (enumerator.MoveNext());
 
                         return result.Some();
                     }
@@ -205,8 +203,8 @@ namespace Optional.Collections
         }
 
         /// <summary>
-        /// Returns the last element of a sequence, satisfying a specified predicate, 
-        /// if such exists.
+        ///     Returns the last element of a sequence, satisfying a specified predicate,
+        ///     if such exists.
         /// </summary>
         /// <param name="source">The sequence to return the last element from.</param>
         /// <param name="predicate">The predicate to filter by.</param>
@@ -268,8 +266,8 @@ namespace Optional.Collections
         }
 
         /// <summary>
-        /// Returns a single element from a sequence, if it exists 
-        /// and is the only element in the sequence.
+        ///     Returns a single element from a sequence, if it exists
+        ///     and is the only element in the sequence.
         /// </summary>
         /// <param name="source">The sequence to return the element from.</param>
         /// <returns>An Option&lt;T&gt; instance containing the element if present.</returns>
@@ -316,8 +314,8 @@ namespace Optional.Collections
         }
 
         /// <summary>
-        /// Returns a single element from a sequence, satisfying a specified predicate, 
-        /// if it exists and is the only element in the sequence.
+        ///     Returns a single element from a sequence, satisfying a specified predicate,
+        ///     if it exists and is the only element in the sequence.
         /// </summary>
         /// <param name="source">The sequence to return the element from.</param>
         /// <param name="predicate">The predicate to filter by.</param>
@@ -351,7 +349,7 @@ namespace Optional.Collections
         }
 
         /// <summary>
-        /// Returns an element at a specified position in a sequence if such exists.
+        ///     Returns an element at a specified position in a sequence if such exists.
         /// </summary>
         /// <param name="source">The sequence to return the element from.</param>
         /// <param name="index">The index in the sequence.</param>

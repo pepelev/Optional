@@ -19,7 +19,6 @@
 //            var some1 = new AsyncOption<string>(Task.FromResult(Option.Some<string>("abc")));
 //            var none1 = new AsyncOption<string>(Task.FromResult(Option.None<string>()));
 
-
 //            var some2a = Option.Some<string>("abc").ToAsyncOption();
 //            var none2a = Option.None<string>().ToAsyncOption();
 //            var some2b = Task.FromResult(Option.Some<string>("abc")).ToAsyncOption();
@@ -389,3 +388,4 @@
 //}
 
 //#endif
+

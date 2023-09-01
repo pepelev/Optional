@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Optional.Utilities
 {
     /// <summary>
-    /// Utility functionality for catching and wrapping exceptions in an optional.
+    ///     Utility functionality for catching and wrapping exceptions in an optional.
     /// </summary>
     public static class Safe
     {
         /// <summary>
-        /// Executes an operation safely, catching any potential
-        /// exceptions and wrapping the result in an Option&lt;T&gt; instance.
+        ///     Executes an operation safely, catching any potential
+        ///     exceptions and wrapping the result in an Option&lt;T&gt; instance.
         /// </summary>
         /// <param name="operation">The operation to perform.</param>
         /// <returns>An Option&lt;T&gt; instance containing the result or a caught exception.</returns>
@@ -31,9 +28,9 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Executes an operation safely, catching any potential
-        /// exceptions of the specified type and wrapping the result
-        /// in an Option&lt;T&gt; instance.
+        ///     Executes an operation safely, catching any potential
+        ///     exceptions of the specified type and wrapping the result
+        ///     in an Option&lt;T&gt; instance.
         /// </summary>
         /// <param name="operation">The operation to perform.</param>
         /// <returns>An Option&lt;T&gt; instance containing the result or a caught exception.</returns>
@@ -53,9 +50,9 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Executes an operation safely, catching any potential
-        /// exceptions of one of the specified types and wrapping
-        /// the result in an Option&lt;T&gt; instance.
+        ///     Executes an operation safely, catching any potential
+        ///     exceptions of one of the specified types and wrapping
+        ///     the result in an Option&lt;T&gt; instance.
         /// </summary>
         /// <param name="operation">The operation to perform.</param>
         /// <returns>An Option&lt;T&gt; instance containing the result or a caught exception.</returns>
@@ -80,9 +77,9 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Executes an operation safely, catching any potential
-        /// exceptions of one of the specified types and wrapping
-        /// the result in an Option&lt;T&gt; instance.
+        ///     Executes an operation safely, catching any potential
+        ///     exceptions of one of the specified types and wrapping
+        ///     the result in an Option&lt;T&gt; instance.
         /// </summary>
         /// <param name="operation">The operation to perform.</param>
         /// <returns>An Option&lt;T&gt; instance containing the result or a caught exception.</returns>
@@ -112,9 +109,9 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Executes an operation safely, catching any potential
-        /// exceptions of one of the specified types and wrapping
-        /// the result in an Option&lt;T&gt; instance.
+        ///     Executes an operation safely, catching any potential
+        ///     exceptions of one of the specified types and wrapping
+        ///     the result in an Option&lt;T&gt; instance.
         /// </summary>
         /// <param name="operation">The operation to perform.</param>
         /// <returns>An Option&lt;T&gt; instance containing the result or a caught exception.</returns>
@@ -149,9 +146,9 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Executes an operation safely, catching any potential
-        /// exceptions of one of the specified types and wrapping
-        /// the result in an Option&lt;T&gt; instance.
+        ///     Executes an operation safely, catching any potential
+        ///     exceptions of one of the specified types and wrapping
+        ///     the result in an Option&lt;T&gt; instance.
         /// </summary>
         /// <param name="operation">The operation to perform.</param>
         /// <returns>An Option&lt;T&gt; instance containing the result or a caught exception.</returns>

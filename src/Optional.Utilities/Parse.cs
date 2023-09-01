@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 
 namespace Optional.Utilities
 {
     /// <summary>
-    /// A collection of static helper methods, for parsing strings into simple types.
+    ///     A collection of static helper methods, for parsing strings into simple types.
     /// </summary>
     public static class Parse
     {
         /// <summary>
-        /// Tries to parse a string into a byte.
+        ///     Tries to parse a string into a byte.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<byte> ToByte(string s)
@@ -22,7 +19,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a byte.
+        ///     Tries to parse a string into a byte.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<byte> ToByte(string s, IFormatProvider provider, NumberStyles styles)
@@ -32,7 +29,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a signed byte.
+        ///     Tries to parse a string into a signed byte.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         [CLSCompliant(false)]
@@ -43,7 +40,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a signed byte.
+        ///     Tries to parse a string into a signed byte.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         [CLSCompliant(false)]
@@ -54,7 +51,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a short.
+        ///     Tries to parse a string into a short.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<short> ToShort(string s)
@@ -64,7 +61,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a short.
+        ///     Tries to parse a string into a short.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<short> ToShort(string s, IFormatProvider provider, NumberStyles styles)
@@ -74,7 +71,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into an unsigned short.
+        ///     Tries to parse a string into an unsigned short.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         [CLSCompliant(false)]
@@ -85,7 +82,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into an unsigned short.
+        ///     Tries to parse a string into an unsigned short.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         [CLSCompliant(false)]
@@ -96,7 +93,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into an int.
+        ///     Tries to parse a string into an int.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<int> ToInt(string s)
@@ -106,7 +103,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into an int.
+        ///     Tries to parse a string into an int.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<int> ToInt(string s, IFormatProvider provider, NumberStyles styles)
@@ -116,7 +113,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into an unsigned int.
+        ///     Tries to parse a string into an unsigned int.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         [CLSCompliant(false)]
@@ -127,7 +124,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into an unsigned int.
+        ///     Tries to parse a string into an unsigned int.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         [CLSCompliant(false)]
@@ -138,7 +135,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a long.
+        ///     Tries to parse a string into a long.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<long> ToLong(string s)
@@ -148,7 +145,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a long.
+        ///     Tries to parse a string into a long.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<long> ToLong(string s, IFormatProvider provider, NumberStyles styles)
@@ -158,7 +155,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into an unsigned long.
+        ///     Tries to parse a string into an unsigned long.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         [CLSCompliant(false)]
@@ -169,7 +166,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into an unsigned long.
+        ///     Tries to parse a string into an unsigned long.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         [CLSCompliant(false)]
@@ -180,7 +177,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a float.
+        ///     Tries to parse a string into a float.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<float> ToFloat(string s)
@@ -190,7 +187,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a float.
+        ///     Tries to parse a string into a float.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<float> ToFloat(string s, IFormatProvider provider, NumberStyles styles)
@@ -200,7 +197,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a double.
+        ///     Tries to parse a string into a double.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<double> ToDouble(string s)
@@ -210,7 +207,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a double.
+        ///     Tries to parse a string into a double.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<double> ToDouble(string s, IFormatProvider provider, NumberStyles styles)
@@ -220,7 +217,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a decimal.
+        ///     Tries to parse a string into a decimal.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<decimal> ToDecimal(string s)
@@ -230,7 +227,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a decimal.
+        ///     Tries to parse a string into a decimal.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<decimal> ToDecimal(string s, IFormatProvider provider, NumberStyles styles)
@@ -240,7 +237,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a bool.
+        ///     Tries to parse a string into a bool.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<bool> ToBool(string s)
@@ -250,7 +247,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a char.
+        ///     Tries to parse a string into a char.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<char> ToChar(string s)
@@ -292,7 +289,7 @@ namespace Optional.Utilities
 #endif
 
         /// <summary>
-        /// Tries to parse a string into a datetime.
+        ///     Tries to parse a string into a datetime.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<DateTime> ToDateTime(string s)
@@ -302,7 +299,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a datetime.
+        ///     Tries to parse a string into a datetime.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<DateTime> ToDateTime(string s, IFormatProvider provider, DateTimeStyles styles)
@@ -312,7 +309,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a datetime with a specific format.
+        ///     Tries to parse a string into a datetime with a specific format.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<DateTime> ToDateTimeExact(string s, string format, IFormatProvider provider, DateTimeStyles styles)
@@ -322,7 +319,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a datetime with a specific format.
+        ///     Tries to parse a string into a datetime with a specific format.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<DateTime> ToDateTimeExact(string s, string[] formats, IFormatProvider provider, DateTimeStyles styles)
@@ -332,7 +329,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a timespan.
+        ///     Tries to parse a string into a timespan.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<TimeSpan> ToTimeSpan(string s)
@@ -394,7 +391,7 @@ namespace Optional.Utilities
 #endif
 
         /// <summary>
-        /// Tries to parse a string into a datetime offset.
+        ///     Tries to parse a string into a datetime offset.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<DateTimeOffset> ToDateTimeOffset(string s)
@@ -404,7 +401,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a datetime offset.
+        ///     Tries to parse a string into a datetime offset.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<DateTimeOffset> ToDateTimeOffset(string s, IFormatProvider provider, DateTimeStyles styles)
@@ -414,7 +411,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a datetime offset with a specific format.
+        ///     Tries to parse a string into a datetime offset with a specific format.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<DateTimeOffset> ToDateTimeOffsetExact(string s, string format, IFormatProvider provider, DateTimeStyles styles)
@@ -424,7 +421,7 @@ namespace Optional.Utilities
         }
 
         /// <summary>
-        /// Tries to parse a string into a datetime offset with a specific format.
+        ///     Tries to parse a string into a datetime offset with a specific format.
         /// </summary>
         /// <returns>An optional value containing the result if any.</returns>
         public static Option<DateTimeOffset> ToDateTimeOffsetExact(string s, string[] formats, IFormatProvider provider, DateTimeStyles styles)

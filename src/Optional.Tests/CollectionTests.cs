@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Optional.Collections;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Optional.Collections;
 
 namespace Optional.Tests
 {
@@ -15,13 +15,13 @@ namespace Optional.Tests
         {
             var list1 = new List<Option<string>>
             {
-                Option.Some<string>("a"),
+                Option.Some("a"),
                 Option.None<string>(),
                 Option.None<string>(),
-                Option.Some<string>("b"),
+                Option.Some("b"),
                 Option.Some<string>(null),
                 Option.None<string>(),
-                Option.Some<string>("c"),
+                Option.Some("c"),
             };
             var list1Expected = new List<string> { "a", "b", null, "c" };
 
@@ -317,6 +317,40 @@ namespace Optional.Tests
             }
         }
 
+        private class TestDictionary<TKey, TValue> : IDictionary<TKey, TValue>
+        {
+            private readonly Dictionary<TKey, TValue> dictionary;
+
+            public TestDictionary(Dictionary<TKey, TValue> dictionary)
+            {
+                this.dictionary = dictionary;
+            }
+
+            private ICollection<KeyValuePair<TKey, TValue>> Collection => dictionary;
+
+            public TValue this[TKey key]
+            {
+                get { return dictionary[key]; }
+                set { dictionary[key] = value; }
+            }
+
+            public int Count => dictionary.Count;
+            public bool IsReadOnly => Collection.IsReadOnly;
+            public ICollection<TKey> Keys => dictionary.Keys;
+            public ICollection<TValue> Values => dictionary.Values;
+            public void Add(KeyValuePair<TKey, TValue> item) => Collection.Add(item);
+            public void Add(TKey key, TValue value) => dictionary.Add(key, value);
+            public void Clear() => Collection.Clear();
+            public bool Contains(KeyValuePair<TKey, TValue> item) => dictionary.Contains(item);
+            public bool ContainsKey(TKey key) => dictionary.ContainsKey(key);
+            public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) => Collection.CopyTo(array, arrayIndex);
+            public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => dictionary.GetEnumerator();
+            public bool Remove(KeyValuePair<TKey, TValue> item) => Collection.Remove(item);
+            public bool Remove(TKey key) => dictionary.Remove(key);
+            public bool TryGetValue(TKey key, out TValue value) => dictionary.TryGetValue(key, out value);
+            IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)dictionary).GetEnumerator();
+        }
+
 #if !NET35
         private class TestReadOnlyDictionary<TKey, TValue> : IReadOnlyDictionary<TKey, TValue>
         {
@@ -352,39 +386,5 @@ namespace Optional.Tests
             IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)list).GetEnumerator();
         }
 #endif
-
-        private class TestDictionary<TKey, TValue> : IDictionary<TKey, TValue>
-        {
-            private readonly Dictionary<TKey, TValue> dictionary;
-
-            public TestDictionary(Dictionary<TKey, TValue> dictionary)
-            {
-                this.dictionary = dictionary;
-            }
-
-            private ICollection<KeyValuePair<TKey, TValue>> Collection => dictionary;
-
-            public TValue this[TKey key]
-            {
-                get { return dictionary[key]; }
-                set { dictionary[key] = value; }
-            }
-
-            public int Count => dictionary.Count;
-            public bool IsReadOnly => Collection.IsReadOnly;
-            public ICollection<TKey> Keys => dictionary.Keys;
-            public ICollection<TValue> Values => dictionary.Values;
-            public void Add(KeyValuePair<TKey, TValue> item) => Collection.Add(item);
-            public void Add(TKey key, TValue value) => dictionary.Add(key, value);
-            public void Clear() => Collection.Clear();
-            public bool Contains(KeyValuePair<TKey, TValue> item) => dictionary.Contains(item);
-            public bool ContainsKey(TKey key) => dictionary.ContainsKey(key);
-            public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) => Collection.CopyTo(array, arrayIndex);
-            public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => dictionary.GetEnumerator();
-            public bool Remove(KeyValuePair<TKey, TValue> item) => Collection.Remove(item);
-            public bool Remove(TKey key) => dictionary.Remove(key);
-            public bool TryGetValue(TKey key, out TValue value) => dictionary.TryGetValue(key, out value);
-            IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)dictionary).GetEnumerator();
-        }
     }
 }

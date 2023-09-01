@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Optional.Unsafe;
 
 namespace Optional.Tests
@@ -89,7 +88,7 @@ namespace Optional.Tests
         [TestMethod]
         public void Either_GetUnsafeValue()
         {
-            var none = "a".None<string, string>("ex");
+            var none = "a".None("ex");
             var some = "a".Some<string, string>();
 
             Assert.AreEqual("a", some.ValueOrFailure());

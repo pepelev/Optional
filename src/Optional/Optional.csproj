@@ -1,65 +1,65 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net35;net45;netstandard1.0;netstandard2.0</TargetFrameworks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <NoWarn>1591</NoWarn>
-    <LangVersion>11</LangVersion>
-    <Nullable>enable</Nullable>
-    <AssemblyName>Optional2</AssemblyName>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net35;net45;netstandard1.0;netstandard2.0</TargetFrameworks>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <NoWarn>1591</NoWarn>
+        <LangVersion>11</LangVersion>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Optional2</AssemblyName>
+    </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net35' ">
-    <DefineConstants>NET35</DefineConstants>
-  </PropertyGroup>
+    <PropertyGroup Condition=" '$(TargetFramework)' == 'net35' ">
+        <DefineConstants>NET35</DefineConstants>
+    </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+    </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-  </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+    </PropertyGroup>
 
-  <!-- NuGet package -->
-  <PropertyGroup>
-    <PackageId>Optional2</PackageId>
-    <Title>Optional2: A robust option type</Title>
-    <AssemblyVersion>4.0.0.0</AssemblyVersion>
-    <FileVersion>4.0.0</FileVersion>
-    <Version>4.1.0</Version>
-    <Authors>Nils Lück, Alexey Pepelev</Authors>
-    <Product>Optional2</Product>
-    <Description>
-      Optional is a robust option/maybe type for C#.
-      Originally developed by Nils Lück - https://www.nuget.org/packages/Optional
-    </Description>
-    <PackageTags>Option Some None Maybe Either Exception Null Monad Monadic Functional</PackageTags>
-    <PackageIcon>Icon.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/pepelev/Optional</PackageProjectUrl>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <MinClientVersion>2.12</MinClientVersion>
-    <IncludeSymbols>true</IncludeSymbols>
-    <IncludeSource>true</IncludeSource>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <RepositoryType>git</RepositoryType>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-  </PropertyGroup>
+    <!-- NuGet package -->
+    <PropertyGroup>
+        <PackageId>Optional2</PackageId>
+        <Title>Optional2: A robust option type</Title>
+        <AssemblyVersion>4.0.0.0</AssemblyVersion>
+        <FileVersion>4.0.0</FileVersion>
+        <Version>4.1.0</Version>
+        <Authors>Nils Lück, Alexey Pepelev</Authors>
+        <Product>Optional2</Product>
+        <Description>
+            Optional is a robust option/maybe type for C#.
+            Originally developed by Nils Lück - https://www.nuget.org/packages/Optional
+        </Description>
+        <PackageTags>Option Some None Maybe Either Exception Null Monad Monadic Functional</PackageTags>
+        <PackageIcon>Icon.png</PackageIcon>
+        <PackageProjectUrl>https://github.com/pepelev/Optional</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <MinClientVersion>2.12</MinClientVersion>
+        <IncludeSymbols>true</IncludeSymbols>
+        <IncludeSource>true</IncludeSource>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <RepositoryType>git</RepositoryType>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    </PropertyGroup>
 
-  <!-- Import icon -->
-  <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)/../../icon/Icon.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
+    <!-- Import icon -->
+    <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)/../../icon/Icon.png" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+    </ItemGroup>
 
 </Project>

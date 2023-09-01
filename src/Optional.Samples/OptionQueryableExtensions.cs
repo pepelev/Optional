@@ -7,7 +7,7 @@ namespace Optional.Samples
     public static class OptionQueryableExtensions
     {
         /// <summary>
-        /// Returns the first element of a sequence if such exists.
+        ///     Returns the first element of a sequence if such exists.
         /// </summary>
         /// <param name="source">The sequence to return the first element from.</param>
         /// <returns>An Option&lt;T&gt; instance containing the first element if present.</returns>
@@ -20,8 +20,8 @@ namespace Optional.Samples
         }
 
         /// <summary>
-        /// Returns the first element of a sequence, satisfying a specified predicate, 
-        /// if such exists.
+        ///     Returns the first element of a sequence, satisfying a specified predicate,
+        ///     if such exists.
         /// </summary>
         /// <param name="source">The sequence to return the first element from.</param>
         /// <param name="predicate">The predicate to filter by.</param>
@@ -36,7 +36,7 @@ namespace Optional.Samples
         }
 
         /// <summary>
-        /// Returns the last element of a sequence if such exists.
+        ///     Returns the last element of a sequence if such exists.
         /// </summary>
         /// <param name="source">The sequence to return the last element from.</param>
         /// <returns>An Option&lt;T&gt; instance containing the last element if present.</returns>
@@ -49,8 +49,8 @@ namespace Optional.Samples
         }
 
         /// <summary>
-        /// Returns the last element of a sequence, satisfying a specified predicate, 
-        /// if such exists.
+        ///     Returns the last element of a sequence, satisfying a specified predicate,
+        ///     if such exists.
         /// </summary>
         /// <param name="source">The sequence to return the last element from.</param>
         /// <param name="predicate">The predicate to filter by.</param>
@@ -65,8 +65,8 @@ namespace Optional.Samples
         }
 
         /// <summary>
-        /// Returns a single element from a sequence, if it exists 
-        /// and is the only element in the sequence.
+        ///     Returns a single element from a sequence, if it exists
+        ///     and is the only element in the sequence.
         /// </summary>
         /// <param name="source">The sequence to return the element from.</param>
         /// <returns>An Option&lt;T&gt; instance containing the element if present.</returns>
@@ -86,8 +86,8 @@ namespace Optional.Samples
         }
 
         /// <summary>
-        /// Returns a single element from a sequence, satisfying a specified predicate, 
-        /// if it exists and is the only element in the sequence.
+        ///     Returns a single element from a sequence, satisfying a specified predicate,
+        ///     if it exists and is the only element in the sequence.
         /// </summary>
         /// <param name="source">The sequence to return the element from.</param>
         /// <param name="predicate">The predicate to filter by.</param>
@@ -109,7 +109,7 @@ namespace Optional.Samples
         }
 
         /// <summary>
-        /// Returns an element at a specified position in a sequence if such exists.
+        ///     Returns an element at a specified position in a sequence if such exists.
         /// </summary>
         /// <param name="source">The sequence to return the element from.</param>
         /// <param name="index">The index in the sequence.</param>

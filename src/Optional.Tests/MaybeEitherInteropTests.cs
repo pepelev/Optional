@@ -1,8 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Optional.Tests
 {
@@ -13,7 +9,7 @@ namespace Optional.Tests
         public void MaybeEither_Conversion()
         {
             var noneMaybe = Option.None<string>();
-            var someMaybe = Option.Some<string>("val");
+            var someMaybe = Option.Some("val");
 
             var noneEither = Option.None<string, string>("ex");
             var someEither = Option.Some<string, string>("val");
@@ -29,17 +25,22 @@ namespace Optional.Tests
         public void MaybeEither_ConversionLazy()
         {
             var noneMaybe = Option.None<string>();
-            var someMaybe = Option.Some<string>("val");
+            var someMaybe = Option.Some("val");
 
             Assert.AreEqual(noneMaybe.WithException(() => "ex").ValueOrException(), "ex");
-            Assert.AreEqual(someMaybe.WithException(() => { Assert.Fail(); return "ex"; }).ValueOrException(), "val");
+            Assert.AreEqual(someMaybe.WithException(() =>
+                {
+                    Assert.Fail();
+                    return "ex";
+                }).ValueOrException(),
+                "val");
         }
 
         [TestMethod]
         public void MaybeEither_Transformation()
         {
             var noneMaybe = Option.None<string>();
-            var someMaybe = Option.Some<string>("val");
+            var someMaybe = Option.Some("val");
 
             var noneEither = Option.None<string, string>("ex");
             var someEither = Option.Some<string, string>("val");
@@ -51,26 +52,38 @@ namespace Optional.Tests
             Assert.AreEqual(someMaybe.FlatMap(val => Option.Some<string, string>("val1")).ValueOr("ex"), "val1");
 
             Assert.AreEqual(noneEither.FlatMap(val => Option.None<string>(), "ex1"), noneEither);
-            Assert.AreEqual(noneEither.FlatMap(val => Option.Some<string>("val"), "ex1"), noneEither);
+            Assert.AreEqual(noneEither.FlatMap(val => Option.Some("val"), "ex1"), noneEither);
             Assert.AreEqual(someEither.FlatMap(val => Option.None<string>(), "ex"), noneEither);
-            Assert.AreEqual(someEither.FlatMap(val => Option.Some<string>("val"), "ex"), someEither);
-            Assert.AreEqual(someEither.FlatMap(val => Option.Some<string>("val1"), "ex").ValueOr("ex"), "val1");
+            Assert.AreEqual(someEither.FlatMap(val => Option.Some("val"), "ex"), someEither);
+            Assert.AreEqual(someEither.FlatMap(val => Option.Some("val1"), "ex").ValueOr("ex"), "val1");
         }
 
         [TestMethod]
         public void MaybeEither_TransformationLazy()
         {
             var noneMaybe = Option.None<string>();
-            var someMaybe = Option.Some<string>("val");
+            var someMaybe = Option.Some("val");
 
             var noneEither = Option.None<string, string>("ex");
             var someEither = Option.Some<string, string>("val");
 
             Assert.AreEqual(noneEither.FlatMap(val => Option.None<string>(), () => "ex1"), noneEither);
-            Assert.AreEqual(noneEither.FlatMap(val => Option.Some<string>("val"), () => "ex1"), noneEither);
+            Assert.AreEqual(noneEither.FlatMap(val => Option.Some("val"), () => "ex1"), noneEither);
             Assert.AreEqual(someEither.FlatMap(val => Option.None<string>(), () => "ex"), noneEither);
-            Assert.AreEqual(someEither.FlatMap(val => Option.Some<string>("val"), () => { Assert.Fail(); return "ex"; }), someEither);
-            Assert.AreEqual(someEither.FlatMap(val => Option.Some<string>("val1"), () => { Assert.Fail(); return "ex"; }).ValueOr("ex"), "val1");
+            Assert.AreEqual(someEither.FlatMap(val => Option.Some("val"),
+                    () =>
+                    {
+                        Assert.Fail();
+                        return "ex";
+                    }),
+                someEither);
+            Assert.AreEqual(someEither.FlatMap(val => Option.Some("val1"),
+                    () =>
+                    {
+                        Assert.Fail();
+                        return "ex";
+                    }).ValueOr("ex"),
+                "val1");
         }
     }
 }

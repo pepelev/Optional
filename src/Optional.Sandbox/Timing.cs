@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 namespace Optional.Sandbox
 {
@@ -10,7 +7,11 @@ namespace Optional.Sandbox
     {
         public static double RunningTimeInMs<TResult>(Func<TResult> action, int count)
         {
-            return RunningTimeInMs(() => { var x = action(); }, count);
+            return RunningTimeInMs(() =>
+                {
+                    var x = action();
+                },
+                count);
         }
 
         public static double RunningTimeInMs(Action action, int count)
@@ -20,6 +21,7 @@ namespace Optional.Sandbox
             {
                 action();
             }
+
             var ticks = sw.ElapsedTicks;
 
             return 1000.0 * ticks / ((double)Stopwatch.Frequency * count);

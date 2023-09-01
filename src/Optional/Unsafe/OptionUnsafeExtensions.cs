@@ -5,7 +5,7 @@ namespace Optional.Unsafe
     public static class OptionUnsafeExtensions
     {
         /// <summary>
-        /// Converts an optional to a Nullable&lt;T&gt;.
+        ///     Converts an optional to a Nullable&lt;T&gt;.
         /// </summary>
         /// <param name="option">The specified optional.</param>
         /// <returns>The Nullable&lt;T&gt; instance.</returns>
@@ -20,7 +20,7 @@ namespace Optional.Unsafe
         }
 
         /// <summary>
-        /// Returns the existing value if present, otherwise default(T).
+        ///     Returns the existing value if present, otherwise default(T).
         /// </summary>
         /// <param name="option">The specified optional.</param>
         /// <returns>The existing value or a default value.</returns>
@@ -35,7 +35,7 @@ namespace Optional.Unsafe
         }
 
         /// <summary>
-        /// Returns the existing value if present, or throws an OptionValueMissingException.
+        ///     Returns the existing value if present, or throws an OptionValueMissingException.
         /// </summary>
         /// <param name="option">The specified optional.</param>
         /// <returns>The existing value.</returns>
@@ -51,7 +51,7 @@ namespace Optional.Unsafe
         }
 
         /// <summary>
-        /// Converts an optional to a Nullable&lt;T&gt;.
+        ///     Converts an optional to a Nullable&lt;T&gt;.
         /// </summary>
         /// <param name="option">The specified optional.</param>
         /// <returns>The Nullable&lt;T&gt; instance.</returns>
@@ -66,7 +66,7 @@ namespace Optional.Unsafe
         }
 
         /// <summary>
-        /// Returns the existing value if present, otherwise default(T).
+        ///     Returns the existing value if present, otherwise default(T).
         /// </summary>
         /// <param name="option">The specified optional.</param>
         /// <returns>The existing value or a default value.</returns>
@@ -81,7 +81,7 @@ namespace Optional.Unsafe
         }
 
         /// <summary>
-        /// Returns the existing value if present, or throws an OptionValueMissingException.
+        ///     Returns the existing value if present, or throws an OptionValueMissingException.
         /// </summary>
         /// <param name="option">The specified optional.</param>
         /// <returns>The existing value.</returns>
@@ -97,7 +97,7 @@ namespace Optional.Unsafe
         }
 
         /// <summary>
-        /// Returns the existing value if present, or throws an OptionValueMissingException.
+        ///     Returns the existing value if present, or throws an OptionValueMissingException.
         /// </summary>
         /// <param name="option">The specified optional.</param>
         /// <param name="errorMessage">An error message to use in case of failure.</param>
@@ -114,7 +114,7 @@ namespace Optional.Unsafe
         }
 
         /// <summary>
-        /// Returns the existing value if present, or throws an OptionValueMissingException.
+        ///     Returns the existing value if present, or throws an OptionValueMissingException.
         /// </summary>
         /// <param name="option">The specified optional.</param>
         /// <param name="errorMessageFactory">A factory function generating an error message to use in case of failure.</param>
@@ -133,7 +133,7 @@ namespace Optional.Unsafe
         }
 
         /// <summary>
-        /// Returns the existing value if present, or throws an OptionValueMissingException.
+        ///     Returns the existing value if present, or throws an OptionValueMissingException.
         /// </summary>
         /// <param name="option">The specified optional.</param>
         /// <param name="errorMessage">An error message to use in case of failure.</param>
@@ -150,7 +150,7 @@ namespace Optional.Unsafe
         }
 
         /// <summary>
-        /// Returns the existing value if present, or throws an OptionValueMissingException.
+        ///     Returns the existing value if present, or throws an OptionValueMissingException.
         /// </summary>
         /// <param name="option">The specified optional.</param>
         /// <param name="errorMessageFactory">A factory function generating an error message to use in case of failure.</param>
