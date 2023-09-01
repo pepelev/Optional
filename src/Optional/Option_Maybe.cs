@@ -268,7 +268,7 @@ namespace Optional
         public Option<T, TException> WithException<TException>(TException exception)
         {
             return Match(
-                value => Option.Some<T, TException>(value),
+                Option.Some<T, TException>,
                 () => Option.None<T, TException>(exception)
             );
         }
@@ -283,7 +283,7 @@ namespace Optional
             if (exceptionFactory == null) throw new ArgumentNullException(nameof(exceptionFactory));
 
             return Match(
-                value => Option.Some<T, TException>(value),
+                Option.Some<T, TException>,
                 () => Option.None<T, TException>(exceptionFactory())
             );
         }
@@ -361,7 +361,7 @@ namespace Optional
 
             return Match(
                 value => Option.Some(mapping(value)),
-                () => Option.None<TResult>()
+                Option.None<TResult>
             );
         }
 
@@ -378,7 +378,7 @@ namespace Optional
 
             return Match(
                 mapping,
-                () => Option.None<TResult>()
+                Option.None<TResult>
             );
         }
 

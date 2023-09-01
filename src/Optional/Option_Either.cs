@@ -314,7 +314,7 @@ namespace Optional
         public Option<T> WithoutException()
         {
             return Match(
-                value => Option.Some(value),
+                Option.Some,
                 _ => Option.None<T>()
             );
         }
@@ -392,7 +392,7 @@ namespace Optional
 
             return Match(
                 value => Option.Some<TResult, TException>(mapping(value)),
-                exception => Option.None<TResult, TException>(exception)
+                Option.None<TResult, TException>
             );
         }
 
@@ -407,7 +407,7 @@ namespace Optional
             if (mapping == null) throw new ArgumentNullException(nameof(mapping));
 
             return Match(
-                value => Option.Some<T, TExceptionResult>(value),
+                Option.Some<T, TExceptionResult>,
                 exception => Option.None<T, TExceptionResult>(mapping(exception))
             );
         }
@@ -425,7 +425,7 @@ namespace Optional
 
             return Match(
                 mapping,
-                exception => Option.None<TResult, TException>(exception)
+                Option.None<TResult, TException>
             );
         }
 
