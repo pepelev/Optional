@@ -1,20 +1,19 @@
-namespace Optional.Sandbox
+namespace Optional.Sandbox;
+
+public static class Nullability
 {
-    public static class Nullability
+    public static string GiveNotNull(Option<string> a)
     {
-        public static string GiveNotNull(Option<string> a)
-        {
-            return a.ValueOr((string?)null);
-        }
+        return a.ValueOr((string?)null);
+    }
 
-        public static string? GiveNull(Option<string> a)
-        {
-            return a.ValueOr((string?)null);
-        }
+    public static string? GiveNull(Option<string> a)
+    {
+        return a.ValueOr((string?)null);
+    }
 
-        public static string GiveValue(Option<string> a)
-        {
-            return a.ValueOr("a");
-        }
+    public static string GiveValue(Option<string> a)
+    {
+        return a.ValueOr("a");
     }
 }

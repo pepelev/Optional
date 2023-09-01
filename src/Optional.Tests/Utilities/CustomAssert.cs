@@ -1,8 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Optional.Tests.Utilities
 {
@@ -17,7 +14,9 @@ namespace Optional.Tests.Utilities
                 action();
                 success = true;
             }
-            catch (TException) { }
+            catch (TException)
+            {
+            }
             catch (Exception)
             {
                 Assert.Fail();

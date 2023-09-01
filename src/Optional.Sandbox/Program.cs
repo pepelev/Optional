@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace Optional.Sandbox
+namespace Optional.Sandbox;
+
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.Read();
-        }
+        Console.Read();
     }
 }

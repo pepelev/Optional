@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Optional.Utilities;
 using Optional.Tests.Utilities;
-
+using Optional.Utilities;
 using Ex = System.Exception;
 using Ex1 = System.ArgumentNullException;
 using Ex2 = System.Text.EncoderFallbackException;
@@ -225,24 +224,26 @@ namespace Optional.Tests.Extensions
             Assert.IsTrue(success.ValueOr(false));
         }
 
-        private class BaseEx : System.Exception
+        private class BaseEx : Ex
         {
             public BaseEx()
             {
             }
 
-            public BaseEx(string message) : base(message)
+            public BaseEx(string message)
+                : base(message)
             {
             }
         }
 
         private class SubEx : BaseEx
         {
-            public SubEx() : base()
+            public SubEx()
             {
             }
 
-            public SubEx(string message) : base(message)
+            public SubEx(string message)
+                : base(message)
             {
             }
         }
