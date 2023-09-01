@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net35;net45;netstandard1.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net35;net45;netstandard1.0;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <NoWarn>1591</NoWarn>
     <LangVersion>11</LangVersion>
     <Nullable>enable</Nullable>
+    <AssemblyName>Optional2</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net35' ">
@@ -31,10 +32,13 @@
     <Title>Optional2: A robust option type</Title>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <FileVersion>4.0.0</FileVersion>
-    <Version>4.1.0-rc1</Version>
+    <Version>4.1.0-rc2</Version>
     <Authors>Nils Lück, Alexey Pepelev</Authors>
     <Product>Optional2</Product>
-    <Description>Optional is a robust option/maybe type for C#</Description>
+    <Description>
+      Optional is a robust option/maybe type for C#.
+      Originally developed by Nils Lück - https://www.nuget.org/packages/Optional
+    </Description>
     <PackageTags>Option Some None Maybe Either Exception Null Monad Monadic Functional</PackageTags>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/pepelev/Optional</PackageProjectUrl>
