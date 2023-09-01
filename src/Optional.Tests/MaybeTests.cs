@@ -287,40 +287,50 @@ namespace Optional.Tests
                     {
                         Assert.Fail();
                         return -1;
-                    }),
-                1);
+                    }
+                ),
+                1
+            );
             Assert.AreEqual(
                 someNullable.ValueOr(
                     () =>
                     {
                         Assert.Fail();
                         return -1;
-                    }),
-                1);
+                    }
+                ),
+                1
+            );
             Assert.AreEqual(
                 someNullableEmpty.ValueOr(
                     () =>
                     {
                         Assert.Fail();
                         return -1;
-                    }),
-                null);
+                    }
+                ),
+                null
+            );
             Assert.AreEqual(
                 someClass.ValueOr(
                     () =>
                     {
                         Assert.Fail();
                         return "-1";
-                    }),
-                "1");
+                    }
+                ),
+                "1"
+            );
             Assert.AreEqual(
                 someClassNull.ValueOr(
                     () =>
                     {
                         Assert.Fail();
                         return "-1";
-                    }),
-                null);
+                    }
+                ),
+                null
+            );
         }
 
         [TestMethod]
@@ -407,19 +417,22 @@ namespace Optional.Tests
                 {
                     Assert.Fail();
                     return -1;
-                });
+                }
+            );
             someNullable.Or(
                 () =>
                 {
                     Assert.Fail();
                     return -1;
-                });
+                }
+            );
             someClass.Or(
                 () =>
                 {
                     Assert.Fail();
                     return "-1";
-                });
+                }
+            );
         }
 
         [TestMethod]
@@ -458,19 +471,22 @@ namespace Optional.Tests
                 {
                     Assert.Fail();
                     return Option.None<int>();
-                });
+                }
+            );
             someNullable.Else(
                 () =>
                 {
                     Assert.Fail();
                     return Option.None<int?>();
-                });
+                }
+            );
             someClass.Else(
                 () =>
                 {
                     Assert.Fail();
                     return Option.None<string>();
-                });
+                }
+            );
         }
 
         [TestMethod]

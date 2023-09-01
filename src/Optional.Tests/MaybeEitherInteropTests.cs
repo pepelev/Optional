@@ -34,8 +34,10 @@ namespace Optional.Tests
                     {
                         Assert.Fail();
                         return "ex";
-                    }).ValueOrException(),
-                "val");
+                    }
+                ).ValueOrException(),
+                "val"
+            );
         }
 
         [TestMethod]
@@ -79,8 +81,10 @@ namespace Optional.Tests
                     {
                         Assert.Fail();
                         return "ex";
-                    }),
-                someEither);
+                    }
+                ),
+                someEither
+            );
             Assert.AreEqual(
                 someEither.FlatMap(
                     val => Option.Some("val1"),
@@ -88,8 +92,10 @@ namespace Optional.Tests
                     {
                         Assert.Fail();
                         return "ex";
-                    }).ValueOr("ex"),
-                "val1");
+                    }
+                ).ValueOr("ex"),
+                "val1"
+            );
         }
     }
 }

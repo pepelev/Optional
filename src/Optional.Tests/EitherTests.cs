@@ -352,40 +352,50 @@ namespace Optional.Tests
                     {
                         Assert.Fail();
                         return -1;
-                    }),
-                1);
+                    }
+                ),
+                1
+            );
             Assert.AreEqual(
                 someNullable.ValueOr(
                     () =>
                     {
                         Assert.Fail();
                         return -1;
-                    }),
-                1);
+                    }
+                ),
+                1
+            );
             Assert.AreEqual(
                 someNullableEmpty.ValueOr(
                     () =>
                     {
                         Assert.Fail();
                         return -1;
-                    }),
-                null);
+                    }
+                ),
+                null
+            );
             Assert.AreEqual(
                 someClass.ValueOr(
                     () =>
                     {
                         Assert.Fail();
                         return "-1";
-                    }),
-                "1");
+                    }
+                ),
+                "1"
+            );
             Assert.AreEqual(
                 someClassNull.ValueOr(
                     () =>
                     {
                         Assert.Fail();
                         return "-1";
-                    }),
-                null);
+                    }
+                ),
+                null
+            );
 
             Assert.AreEqual(
                 someStruct.ValueOr(
@@ -393,40 +403,50 @@ namespace Optional.Tests
                     {
                         Assert.Fail();
                         return -1;
-                    }),
-                1);
+                    }
+                ),
+                1
+            );
             Assert.AreEqual(
                 someNullable.ValueOr(
                     ex =>
                     {
                         Assert.Fail();
                         return -1;
-                    }),
-                1);
+                    }
+                ),
+                1
+            );
             Assert.AreEqual(
                 someNullableEmpty.ValueOr(
                     ex =>
                     {
                         Assert.Fail();
                         return -1;
-                    }),
-                null);
+                    }
+                ),
+                null
+            );
             Assert.AreEqual(
                 someClass.ValueOr(
                     ex =>
                     {
                         Assert.Fail();
                         return "-1";
-                    }),
-                "1");
+                    }
+                ),
+                "1"
+            );
             Assert.AreEqual(
                 someClassNull.ValueOr(
                     ex =>
                     {
                         Assert.Fail();
                         return "-1";
-                    }),
-                null);
+                    }
+                ),
+                null
+            );
         }
 
         [TestMethod]
@@ -515,19 +535,22 @@ namespace Optional.Tests
                 {
                     Assert.Fail();
                     return -1;
-                });
+                }
+            );
             someNullable.Or(
                 () =>
                 {
                     Assert.Fail();
                     return -1;
-                });
+                }
+            );
             someClass.Or(
                 () =>
                 {
                     Assert.Fail();
                     return "-1";
-                });
+                }
+            );
 
             var someStructEx = noneStruct.Or(ex => ex.GetHashCode());
             var someNullableEx = noneNullable.Or(ex => ex.GetHashCode());
@@ -546,19 +569,22 @@ namespace Optional.Tests
                 {
                     Assert.Fail();
                     return -1;
-                });
+                }
+            );
             someNullableEx.Or(
                 () =>
                 {
                     Assert.Fail();
                     return -1;
-                });
+                }
+            );
             someClassEx.Or(
                 () =>
                 {
                     Assert.Fail();
                     return "-1";
-                });
+                }
+            );
         }
 
         [TestMethod]
@@ -610,19 +636,22 @@ namespace Optional.Tests
                 {
                     Assert.Fail();
                     return (-1).Some<int, string>();
-                });
+                }
+            );
             someNullable.Else(
                 () =>
                 {
                     Assert.Fail();
                     return Option.Some<int?, string>(-1);
-                });
+                }
+            );
             someClass.Else(
                 () =>
                 {
                     Assert.Fail();
                     return "-1".Some<string, string>();
-                });
+                }
+            );
 
             var someStructEx = noneStruct.Else(ex => ex.GetHashCode().Some<int, string>());
             var someNullableEx = noneNullable.Else(ex => Option.Some<int?, string>(ex.GetHashCode()));
@@ -641,19 +670,22 @@ namespace Optional.Tests
                 {
                     Assert.Fail();
                     return (-1).Some<int, string>();
-                });
+                }
+            );
             someNullableEx.Else(
                 () =>
                 {
                     Assert.Fail();
                     return Option.Some<int?, string>(-1);
-                });
+                }
+            );
             someClassEx.Else(
                 () =>
                 {
                     Assert.Fail();
                     return "-1".Some<string, string>();
-                });
+                }
+            );
         }
 
         [TestMethod]
@@ -721,19 +753,22 @@ namespace Optional.Tests
                 {
                     Assert.Fail();
                     return "ex";
-                });
+                }
+            );
             var some2 = "1".SomeNotNull(
                 () =>
                 {
                     Assert.Fail();
                     return "ex";
-                });
+                }
+            );
             var some3 = ((int?)1).ToOption(
                 () =>
                 {
                     Assert.Fail();
                     return -1;
-                });
+                }
+            );
 
             Assert.AreEqual(some1.ValueOr("-1"), "1");
             Assert.AreEqual(some2.ValueOr("-1"), "1");
@@ -914,7 +949,8 @@ namespace Optional.Tests
                 {
                     Assert.Fail();
                     return "ex1";
-                });
+                }
+            );
 
             Assert.IsFalse(noneNotVal.HasValue);
             Assert.IsFalse(someNotVal.HasValue);
@@ -934,7 +970,8 @@ namespace Optional.Tests
                 {
                     Assert.Fail();
                     return "ex1";
-                });
+                }
+            );
 
             Assert.IsFalse(noneFalse.HasValue);
             Assert.IsFalse(someFalse.HasValue);
@@ -973,7 +1010,8 @@ namespace Optional.Tests
                 {
                     Assert.Fail();
                     return "ex1";
-                });
+                }
+            );
             Assert.IsTrue(someNotNull.HasValue);
 
             var noneNotNull = none.NotNull(
@@ -981,7 +1019,8 @@ namespace Optional.Tests
                 {
                     Assert.Fail();
                     return "ex1";
-                });
+                }
+            );
             Assert.IsFalse(noneNotNull.HasValue);
         }
 
