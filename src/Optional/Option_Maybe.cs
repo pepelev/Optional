@@ -215,13 +215,7 @@ namespace Optional
         /// </summary>
         /// <param name="alternative">The alternative value.</param>
         /// <returns>The existing or alternative value.</returns>
-#if NETSTANDARD2_1
-        [return: NotNullIfNotNull(nameof(alternative))]
-        public T? ValueOr(T? alternative)
-#else
-        public T ValueOr(T alternative)
-#endif
-            => hasValue ? value : alternative;
+        public T ValueOr(T alternative) => hasValue ? value : alternative;
 
         /// <summary>
         /// Returns the existing value if present, and otherwise an alternative value.
