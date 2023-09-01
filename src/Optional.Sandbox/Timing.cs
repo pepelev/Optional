@@ -9,7 +9,7 @@ namespace Optional.Sandbox
         {
             return RunningTimeInMs(() =>
                 {
-                    var x = action();
+                    _ = action();
                 },
                 count);
         }
