@@ -17,7 +17,7 @@ namespace Optional.Sandbox
         public static double RunningTimeInMs(Action action, int count)
         {
             var sw = Stopwatch.StartNew();
-            for (int i = 0; i < count; i++)
+            for (var i = 0; i < count; i++)
             {
                 action();
             }

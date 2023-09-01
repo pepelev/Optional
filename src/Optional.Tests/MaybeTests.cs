@@ -650,7 +650,7 @@ namespace Optional.Tests
                 Assert.Fail();
             }
 
-            int count = 0;
+            var count = 0;
             foreach (var value in someAsEnumerable)
             {
                 Assert.AreEqual(value, "a");
@@ -682,7 +682,7 @@ namespace Optional.Tests
                 Assert.Fail();
             }
 
-            int count = 0;
+            var count = 0;
             foreach (var value in some)
             {
                 Assert.AreEqual(value, "a");

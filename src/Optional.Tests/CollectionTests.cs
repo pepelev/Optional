@@ -289,7 +289,7 @@ namespace Optional.Tests
             Assert.IsFalse(full.ElementAtOrNone(-1).HasValue);
             Assert.IsFalse(full.ElementAtOrNone(full.Count()).HasValue);
 
-            for (int i = 0; i < full.Count(); i++)
+            for (var i = 0; i < full.Count(); i++)
             {
                 Assert.IsTrue(full.ElementAtOrNone(i).HasValue);
                 Assert.AreEqual(full.ElementAtOrNone(i).ValueOr(-1), full.ElementAt(i));
