@@ -24,7 +24,7 @@ namespace Optional
         internal Option(T value, bool hasValue)
         {
             this.value = value;
-            this.HasValue = hasValue;
+            HasValue = hasValue;
         }
 
         /// <summary>

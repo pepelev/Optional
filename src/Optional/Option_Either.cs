@@ -27,7 +27,7 @@ namespace Optional
         internal Option(T value, TException exception, bool hasValue)
         {
             this.value = value;
-            this.HasValue = hasValue;
+            HasValue = hasValue;
             this.exception = exception;
         }
 
