@@ -8,7 +8,7 @@
 //using System.Threading.Tasks;
 //using Optional.Async;
 
-//namespace Optional.Tests.Extensions
+//namespace Optional.OldTests.Extensions
 //{
 //    [TestClass]
 //    public class AsyncOptionTests
