@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net35;net45;netstandard1.0;netstandard2.0</TargetFrameworks>
+        <TargetFrameworks>net35;net45;netstandard1.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <NoWarn>1591</NoWarn>
@@ -55,11 +55,11 @@
 
     <!-- Import icon -->
     <ItemGroup>
-        <None Include="$(MSBuildThisFileDirectory)/../../icon/Icon.png" Pack="true" PackagePath="\"/>
+        <None Include="$(MSBuildThisFileDirectory)/../../icon/Icon.png" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>
