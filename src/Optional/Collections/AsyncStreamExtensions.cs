@@ -14,8 +14,13 @@ public static class AsyncStreamExtensions
     ///     Empty elements are discarded.
     /// </summary>
     /// <param name="source">The sequence of optionals.</param>
+    /// <param name="continueOnCapturedContext">
+    ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
+    /// </param>
     /// <returns>A flattened sequence of values.</returns>
-    public static IAsyncEnumerable<T> Values<T>(this IAsyncEnumerable<Option<T>> source)
+    public static IAsyncEnumerable<T> Values<T>(
+        this IAsyncEnumerable<Option<T>> source,
+        bool continueOnCapturedContext = false)
     {
         if (source == null)
         {
@@ -26,7 +31,7 @@ public static class AsyncStreamExtensions
 
         async IAsyncEnumerable<T> Yield([EnumeratorCancellation] CancellationToken token = default)
         {
-            await foreach (var option in source.WithCancellation(token).ConfigureAwait(false))
+            await foreach (var option in source.WithCancellation(token).ConfigureAwait(continueOnCapturedContext))
             {
                 if (option.HasValue)
                 {
@@ -41,8 +46,13 @@ public static class AsyncStreamExtensions
     ///     Empty elements and their exceptional values are discarded.
     /// </summary>
     /// <param name="source">The sequence of optionals.</param>
+    /// <param name="continueOnCapturedContext">
+    ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
+    /// </param>
     /// <returns>A flattened sequence of values.</returns>
-    public static IAsyncEnumerable<T> Values<T, TException>(this IAsyncEnumerable<Option<T, TException>> source)
+    public static IAsyncEnumerable<T> Values<T, TException>(
+        this IAsyncEnumerable<Option<T, TException>> source,
+        bool continueOnCapturedContext = false)
     {
         if (source == null)
         {
@@ -51,9 +61,9 @@ public static class AsyncStreamExtensions
 
         return Yield();
 
-        async IAsyncEnumerable<T> Yield()
+        async IAsyncEnumerable<T> Yield([EnumeratorCancellation] CancellationToken token = default)
         {
-            await foreach (var option in source.ConfigureAwait(false))
+            await foreach (var option in source.WithCancellation(token).ConfigureAwait(continueOnCapturedContext))
             {
                 if (option.HasValue)
                 {
@@ -68,8 +78,13 @@ public static class AsyncStreamExtensions
     ///     Non-empty elements and their values are discarded.
     /// </summary>
     /// <param name="source">The sequence of optionals.</param>
+    /// <param name="continueOnCapturedContext">
+    ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
+    /// </param>
     /// <returns>A flattened sequence of exceptional values.</returns>
-    public static IAsyncEnumerable<TException> Exceptions<T, TException>(this IAsyncEnumerable<Option<T, TException>> source)
+    public static IAsyncEnumerable<TException> Exceptions<T, TException>(
+        this IAsyncEnumerable<Option<T, TException>> source,
+        bool continueOnCapturedContext = false)
     {
         if (source == null)
         {
@@ -78,9 +93,9 @@ public static class AsyncStreamExtensions
 
         return Yield();
 
-        async IAsyncEnumerable<TException> Yield()
+        async IAsyncEnumerable<TException> Yield([EnumeratorCancellation] CancellationToken token = default)
         {
-            await foreach (var option in source.ConfigureAwait(false))
+            await foreach (var option in source.WithCancellation(token).ConfigureAwait(continueOnCapturedContext))
             {
                 if (!option.HasValue)
                 {
@@ -94,15 +109,22 @@ public static class AsyncStreamExtensions
     ///     Returns the first element of a sequence if such exists.
     /// </summary>
     /// <param name="source">The sequence to return the first element from.</param>
+    /// <param name="token">The cancellation token.</param>
+    /// <param name="continueOnCapturedContext">
+    ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
+    /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the first element if present.</returns>
-    public static async Task<Option<TSource>> FirstOrNone<TSource>(this IAsyncEnumerable<TSource> source)
+    public static async Task<Option<TSource>> FirstOrNone<TSource>(
+        this IAsyncEnumerable<TSource> source,
+        CancellationToken token = default,
+        bool continueOnCapturedContext = false)
     {
         if (source == null)
         {
             throw new ArgumentNullException(nameof(source));
         }
 
-        await foreach (var item in source.ConfigureAwait(false))
+        await foreach (var item in source.WithCancellation(token).ConfigureAwait(continueOnCapturedContext))
         {
             return item.Some();
         }
@@ -114,8 +136,15 @@ public static class AsyncStreamExtensions
     ///     Returns the last element of a sequence if such exists.
     /// </summary>
     /// <param name="source">The sequence to return the last element from.</param>
+    /// <param name="token">The cancellation token.</param>
+    /// <param name="continueOnCapturedContext">
+    ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
+    /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the last element if present.</returns>
-    public static async Task<Option<TSource>> LastOrNone<TSource>(this IAsyncEnumerable<TSource> source)
+    public static async Task<Option<TSource>> LastOrNone<TSource>(
+        this IAsyncEnumerable<TSource> source,
+        CancellationToken token = default,
+        bool continueOnCapturedContext = false)
     {
         if (source == null)
         {
@@ -123,7 +152,7 @@ public static class AsyncStreamExtensions
         }
 
         var result = Option.None<TSource>();
-        await foreach (var item in source.ConfigureAwait(false))
+        await foreach (var item in source.WithCancellation(token).ConfigureAwait(continueOnCapturedContext))
         {
             result = item.Some();
         }
@@ -136,23 +165,30 @@ public static class AsyncStreamExtensions
     ///     and is the only element in the sequence.
     /// </summary>
     /// <param name="source">The sequence to return the element from.</param>
+    /// <param name="token">The cancellation token.</param>
+    /// <param name="continueOnCapturedContext">
+    ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
+    /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the element if present.</returns>
-    public static async Task<Option<TSource>> SingleOrNone<TSource>(this IAsyncEnumerable<TSource> source)
+    public static async Task<Option<TSource>> SingleOrNone<TSource>(
+        this IAsyncEnumerable<TSource> source,
+        CancellationToken token = default,
+        bool continueOnCapturedContext = false)
     {
         if (source == null)
         {
             throw new ArgumentNullException(nameof(source));
         }
 
-        await using var enumerator = source.GetAsyncEnumerator();
-        var hasOne = await enumerator.MoveNextAsync().ConfigureAwait(false);
+        await using var enumerator = source.GetAsyncEnumerator(token);
+        var hasOne = await enumerator.MoveNextAsync().ConfigureAwait(continueOnCapturedContext);
         if (!hasOne)
         {
             return Option.None<TSource>();
         }
 
         var potentialResult = enumerator.Current;
-        var hasTwo = await enumerator.MoveNextAsync().ConfigureAwait(false);
+        var hasTwo = await enumerator.MoveNextAsync().ConfigureAwait(continueOnCapturedContext);
         return hasTwo
             ? Option.None<TSource>()
             : potentialResult.Some();
@@ -163,8 +199,16 @@ public static class AsyncStreamExtensions
     /// </summary>
     /// <param name="source">The sequence to return the element from.</param>
     /// <param name="index">The index in the sequence.</param>
+    /// <param name="token">The cancellation token.</param>
+    /// <param name="continueOnCapturedContext">
+    ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
+    /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the element if found.</returns>
-    public static async Task<Option<TSource>> ElementAtOrNone<TSource>(this IAsyncEnumerable<TSource> source, Index index)
+    public static async Task<Option<TSource>> ElementAtOrNone<TSource>(
+        this IAsyncEnumerable<TSource> source,
+        Index index,
+        CancellationToken token = default,
+        bool continueOnCapturedContext = false)
     {
         if (source == null)
         {
@@ -175,7 +219,7 @@ public static class AsyncStreamExtensions
         {
             var capacity = index.Value + 1;
             var buffer = new Queue<TSource>(capacity);
-            await foreach (var item in source.ConfigureAwait(false))
+            await foreach (var item in source.WithCancellation(token).ConfigureAwait(continueOnCapturedContext))
             {
                 if (buffer.Count == capacity)
                 {
@@ -191,7 +235,7 @@ public static class AsyncStreamExtensions
         }
 
         var itemIndex = 0;
-        await foreach (var item in source.ConfigureAwait(false))
+        await foreach (var item in source.WithCancellation(token).ConfigureAwait(continueOnCapturedContext))
         {
             if (itemIndex == index.Value)
             {
