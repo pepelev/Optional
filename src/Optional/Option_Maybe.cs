@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Optional;
+﻿namespace Optional;
 
 /// <summary>
 ///     Represents an optional value.
