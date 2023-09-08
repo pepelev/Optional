@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Optional.Linq;
+﻿namespace Optional.Linq;
 
 public static class OptionLinqExtensions
 {

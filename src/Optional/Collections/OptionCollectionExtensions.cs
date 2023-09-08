@@ -1,8 +1,5 @@
 ﻿// Note: Several of the below implementations are closely inspired by the corefx source code for FirstOrDefault, etc.
 
-using System;
-using System.Collections.Generic;
-
 namespace Optional.Collections;
 
 public static class OptionCollectionExtensions

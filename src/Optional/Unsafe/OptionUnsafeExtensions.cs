@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Optional.Unsafe;
+﻿namespace Optional.Unsafe;
 
 public static class OptionUnsafeExtensions
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Optional;
+﻿namespace Optional;
 
 public static class OptionExtensions
 {
