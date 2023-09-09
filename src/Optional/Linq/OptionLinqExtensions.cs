@@ -1,10 +1,11 @@
-﻿using System;
-
-namespace Optional.Linq;
+﻿namespace Optional.Linq;
 
 public static class OptionLinqExtensions
 {
-    public static Option<TResult> Select<TSource, TResult>(this Option<TSource> source, Func<TSource, TResult> selector)
+    [Pure]
+    public static Option<TResult> Select<TSource, TResult>(
+        this Option<TSource> source,
+        [InstantHandle] Func<TSource, TResult> selector)
     {
         if (selector == null)
         {
@@ -14,7 +15,10 @@ public static class OptionLinqExtensions
         return source.Map(selector);
     }
 
-    public static Option<TResult> SelectMany<TSource, TResult>(this Option<TSource> source, Func<TSource, Option<TResult>> selector)
+    [Pure]
+    public static Option<TResult> SelectMany<TSource, TResult>(
+        this Option<TSource> source,
+        [InstantHandle] Func<TSource, Option<TResult>> selector)
     {
         if (selector == null)
         {
@@ -24,10 +28,11 @@ public static class OptionLinqExtensions
         return source.FlatMap(selector);
     }
 
+    [Pure]
     public static Option<TResult> SelectMany<TSource, TCollection, TResult>(
         this Option<TSource> source,
-        Func<TSource, Option<TCollection>> collectionSelector,
-        Func<TSource, TCollection, TResult> resultSelector)
+        [InstantHandle] Func<TSource, Option<TCollection>> collectionSelector,
+        [InstantHandle] Func<TSource, TCollection, TResult> resultSelector)
     {
         if (collectionSelector == null)
         {
@@ -42,7 +47,10 @@ public static class OptionLinqExtensions
         return source.FlatMap(src => collectionSelector(src).Map(elem => resultSelector(src, elem)));
     }
 
-    public static Option<TSource> Where<TSource>(this Option<TSource> source, Func<TSource, bool> predicate)
+    [Pure]
+    public static Option<TSource> Where<TSource>(
+        this Option<TSource> source,
+        [InstantHandle] Func<TSource, bool> predicate)
     {
         if (predicate == null)
         {
@@ -52,7 +60,10 @@ public static class OptionLinqExtensions
         return source.Filter(predicate);
     }
 
-    public static Option<TResult, TException> Select<TSource, TException, TResult>(this Option<TSource, TException> source, Func<TSource, TResult> selector)
+    [Pure]
+    public static Option<TResult, TException> Select<TSource, TException, TResult>(
+        this Option<TSource, TException> source,
+        [InstantHandle] Func<TSource, TResult> selector)
     {
         if (selector == null)
         {
@@ -62,10 +73,10 @@ public static class OptionLinqExtensions
         return source.Map(selector);
     }
 
+    [Pure]
     public static Option<TResult, TException> SelectMany<TSource, TException, TResult>(
         this Option<TSource, TException> source,
-        Func<TSource,
-            Option<TResult, TException>> selector)
+        [InstantHandle] Func<TSource, Option<TResult, TException>> selector)
     {
         if (selector == null)
         {
@@ -75,10 +86,11 @@ public static class OptionLinqExtensions
         return source.FlatMap(selector);
     }
 
+    [Pure]
     public static Option<TResult, TException> SelectMany<TSource, TException, TCollection, TResult>(
         this Option<TSource, TException> source,
-        Func<TSource, Option<TCollection, TException>> collectionSelector,
-        Func<TSource, TCollection, TResult> resultSelector)
+        [InstantHandle] Func<TSource, Option<TCollection, TException>> collectionSelector,
+        [InstantHandle] Func<TSource, TCollection, TResult> resultSelector)
     {
         if (collectionSelector == null)
         {

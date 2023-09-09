@@ -23,6 +23,9 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release
 
+    - name: Test.Old
+      run: dotnet test --configuration Release --no-restore --no-build --verbosity normal Optional.OldTests
+
     - name: Test
       run: dotnet test --configuration Release --no-restore --no-build --verbosity normal Optional.Tests
 

@@ -1,17 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net35;net45;netstandard1.0;netstandard2.0;net7</TargetFrameworks>
+        <TargetFrameworks>net35;net40;net45;netstandard1.0;netstandard2.0;netcoreapp2.0;net7.0</TargetFrameworks>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-        <NoWarn>1591</NoWarn>
+        <NoWarn>1591;NETSDK1138</NoWarn>
         <LangVersion>11</LangVersion>
         <Nullable>enable</Nullable>
         <AssemblyName>Optional2</AssemblyName>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'net35' ">
-        <DefineConstants>NET35</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -35,10 +31,7 @@
         <Version>4.1.0</Version>
         <Authors>Nils Lück, Alexey Pepelev</Authors>
         <Product>Optional2</Product>
-        <Description>
-            Optional is a robust option/maybe type for C#.
-            Originally developed by Nils Lück - https://www.nuget.org/packages/Optional
-        </Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>Option Some None Maybe Either Exception Null Monad Monadic Functional</PackageTags>
         <PackageIcon>Icon.png</PackageIcon>
         <PackageProjectUrl>https://github.com/pepelev/Optional</PackageProjectUrl>
@@ -53,13 +46,13 @@
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
     </PropertyGroup>
 
-    <!-- Import icon -->
     <ItemGroup>
-        <None Include="$(MSBuildThisFileDirectory)/../../icon/Icon.png" Pack="true" PackagePath="\"/>
+        <None Include="$(MSBuildThisFileDirectory)/../../icon/Icon.png" Pack="true" PackagePath="/" />
+        <None Include="$(MSBuildThisFileDirectory)../../README.md" Pack="true" PackagePath="/" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     </ItemGroup>
 
 </Project>
