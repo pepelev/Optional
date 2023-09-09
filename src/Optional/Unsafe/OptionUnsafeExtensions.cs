@@ -126,7 +126,7 @@ public static class OptionUnsafeExtensions
     /// <returns>The existing value.</returns>
     /// <exception cref="OptionValueMissingException">Thrown when a value is not present.</exception>
     [Pure]
-    public static T ValueOrFailure<T>(this Option<T> option, Func<string> errorMessageFactory)
+    public static T ValueOrFailure<T>(this Option<T> option, [InstantHandle] Func<string> errorMessageFactory)
     {
         if (errorMessageFactory == null)
         {

@@ -51,9 +51,7 @@ public struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
     /// <param name="obj">The optional to compare with the current one.</param>
     /// <returns>A boolean indicating whether or not the optionals are equal.</returns>
     [Pure]
-    public override bool Equals(object obj) => obj is Option<T>
-        ? Equals((Option<T>)obj)
-        : false;
+    public override bool Equals(object? obj) => obj is Option<T> option && Equals(option);
 
     /// <summary>
     ///     Determines whether two optionals are equal.

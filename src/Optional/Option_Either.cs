@@ -55,9 +55,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// <param name="obj">The optional to compare with the current one.</param>
     /// <returns>A boolean indicating whether or not the optionals are equal.</returns>
     [Pure]
-    public override bool Equals(object obj) => obj is Option<T, TException>
-        ? Equals((Option<T, TException>)obj)
-        : false;
+    public override bool Equals(object? obj) => obj is Option<T, TException> option && Equals(option);
 
     /// <summary>
     ///     Determines whether two optionals are equal.

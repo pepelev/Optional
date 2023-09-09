@@ -26,7 +26,7 @@ public static class OptionExtensions
     /// <returns>An empty optional.</returns>
     [Pure]
     // ReSharper disable UnusedParameter.Global
-    public static Option<T> None<T>([NoEnumeration] this T value) => Option.None<T>();
+    public static Option<T> None<T>([NoEnumeration] this T? value) => Option.None<T>();
     // ReSharper restore UnusedParameter.Global
 
     /// <summary>
@@ -38,7 +38,7 @@ public static class OptionExtensions
     /// <returns>An empty optional.</returns>
     [Pure]
     // ReSharper disable UnusedParameter.Global
-    public static Option<T, TException> None<T, TException>([NoEnumeration] this T value, TException exception) =>
+    public static Option<T, TException> None<T, TException>([NoEnumeration] this T? value, TException exception) =>
         Option.None<T, TException>(exception);
     // ReSharper restore UnusedParameter.Global
 
