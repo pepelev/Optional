@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Numerics;
 using Optional.Unsafe;
 
 namespace Optional.Tests;
@@ -138,6 +140,42 @@ public sealed class Optional_Maybe_Should
                 comparison <= 0
             )
         );
+    }
+
+    #endregion
+
+    #region Parsing
+
+    [Test]
+    public void Be_Parsed()
+    {
+        var option = Option.Parse<int>("123", CultureInfo.InvariantCulture);
+
+        option.Should().Be(123.Some());
+    }
+
+    [Test]
+    public void Be_Parsed_From_Span()
+    {
+        var option = Option.Parse<BigInteger>("500".AsSpan(), CultureInfo.InvariantCulture);
+
+        option.Should().Be(new BigInteger(500).Some());
+    }
+
+    [Test]
+    public void Respect_Culture()
+    {
+        var option = Option.Parse<float>("0,1", CultureInfo.GetCultureInfo("ru-ru"));
+
+        option.Should().Be(0.1f.Some());
+    }
+
+    [Test]
+    public void Respect_Culture_For_Span()
+    {
+        var option = Option.Parse<float>("0,1".AsSpan(), CultureInfo.GetCultureInfo("ru-ru"));
+
+        option.Should().Be(0.1f.Some());
     }
 
     #endregion
