@@ -7,6 +7,7 @@ public static class OptionUnsafeExtensions
     /// </summary>
     /// <param name="option">The specified optional.</param>
     /// <returns>The Nullable&lt;T&gt; instance.</returns>
+    [Pure]
     public static T? ToNullable<T>(this Option<T> option) where T : struct
     {
         if (option.HasValue)
@@ -22,6 +23,7 @@ public static class OptionUnsafeExtensions
     /// </summary>
     /// <param name="option">The specified optional.</param>
     /// <returns>The existing value or a default value.</returns>
+    [Pure]
     public static T? ValueOrDefault<T>(this Option<T> option)
     {
         if (option.HasValue)
@@ -38,6 +40,7 @@ public static class OptionUnsafeExtensions
     /// <param name="option">The specified optional.</param>
     /// <returns>The existing value.</returns>
     /// <exception cref="OptionValueMissingException">Thrown when a value is not present.</exception>
+    [Pure]
     public static T ValueOrFailure<T>(this Option<T> option)
     {
         if (option.HasValue)
@@ -53,6 +56,7 @@ public static class OptionUnsafeExtensions
     /// </summary>
     /// <param name="option">The specified optional.</param>
     /// <returns>The Nullable&lt;T&gt; instance.</returns>
+    [Pure]
     public static T? ToNullable<T, TException>(this Option<T, TException> option) where T : struct
     {
         if (option.HasValue)
@@ -68,6 +72,7 @@ public static class OptionUnsafeExtensions
     /// </summary>
     /// <param name="option">The specified optional.</param>
     /// <returns>The existing value or a default value.</returns>
+    [Pure]
     public static T? ValueOrDefault<T, TException>(this Option<T, TException> option)
     {
         if (option.HasValue)
@@ -84,6 +89,7 @@ public static class OptionUnsafeExtensions
     /// <param name="option">The specified optional.</param>
     /// <returns>The existing value.</returns>
     /// <exception cref="OptionValueMissingException">Thrown when a value is not present.</exception>
+    [Pure]
     public static T ValueOrFailure<T, TException>(this Option<T, TException> option)
     {
         if (option.HasValue)
@@ -101,6 +107,7 @@ public static class OptionUnsafeExtensions
     /// <param name="errorMessage">An error message to use in case of failure.</param>
     /// <returns>The existing value.</returns>
     /// <exception cref="OptionValueMissingException">Thrown when a value is not present.</exception>
+    [Pure]
     public static T ValueOrFailure<T>(this Option<T> option, string errorMessage)
     {
         if (option.HasValue)
@@ -118,6 +125,7 @@ public static class OptionUnsafeExtensions
     /// <param name="errorMessageFactory">A factory function generating an error message to use in case of failure.</param>
     /// <returns>The existing value.</returns>
     /// <exception cref="OptionValueMissingException">Thrown when a value is not present.</exception>
+    [Pure]
     public static T ValueOrFailure<T>(this Option<T> option, Func<string> errorMessageFactory)
     {
         if (errorMessageFactory == null)
@@ -140,6 +148,7 @@ public static class OptionUnsafeExtensions
     /// <param name="errorMessage">An error message to use in case of failure.</param>
     /// <returns>The existing value.</returns>
     /// <exception cref="OptionValueMissingException">Thrown when a value is not present.</exception>
+    [Pure]
     public static T ValueOrFailure<T, TException>(this Option<T, TException> option, string errorMessage)
     {
         if (option.HasValue)
@@ -157,7 +166,10 @@ public static class OptionUnsafeExtensions
     /// <param name="errorMessageFactory">A factory function generating an error message to use in case of failure.</param>
     /// <returns>The existing value.</returns>
     /// <exception cref="OptionValueMissingException">Thrown when a value is not present.</exception>
-    public static T ValueOrFailure<T, TException>(this Option<T, TException> option, Func<TException, string> errorMessageFactory)
+    [Pure]
+    public static T ValueOrFailure<T, TException>(
+        this Option<T, TException> option,
+        [InstantHandle] Func<TException, string> errorMessageFactory)
     {
         if (errorMessageFactory == null)
         {

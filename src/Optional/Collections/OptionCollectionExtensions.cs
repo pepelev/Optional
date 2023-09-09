@@ -10,6 +10,8 @@ public static class OptionCollectionExtensions
     /// </summary>
     /// <param name="source">The sequence of optionals.</param>
     /// <returns>A flattened sequence of values.</returns>
+    [Pure]
+    [LinqTunnel]
     public static IEnumerable<T> Values<T>(this IEnumerable<Option<T>> source)
     {
         if (source == null)
@@ -32,6 +34,8 @@ public static class OptionCollectionExtensions
     /// </summary>
     /// <param name="source">The sequence of optionals.</param>
     /// <returns>A flattened sequence of values.</returns>
+    [Pure]
+    [LinqTunnel]
     public static IEnumerable<T> Values<T, TException>(this IEnumerable<Option<T, TException>> source)
     {
         if (source == null)
@@ -54,6 +58,8 @@ public static class OptionCollectionExtensions
     /// </summary>
     /// <param name="source">The sequence of optionals.</param>
     /// <returns>A flattened sequence of exceptional values.</returns>
+    [Pure]
+    [LinqTunnel]
     public static IEnumerable<TException> Exceptions<T, TException>(this IEnumerable<Option<T, TException>> source)
     {
         if (source == null)
@@ -78,7 +84,8 @@ public static class OptionCollectionExtensions
     /// <param name="source">The dictionary or enumerable in which to locate the key.</param>
     /// <param name="key">The key to locate.</param>
     /// <returns>An Option&lt;TValue&gt; instance containing the associated value if located.</returns>
-    public static Option<TValue> GetValueOrNone<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source, TKey key)
+    [Pure]
+    public static Option<TValue> GetValueOrNone<TKey, TValue>([InstantHandle] this IEnumerable<KeyValuePair<TKey, TValue>> source, TKey key)
     {
         if (source == null)
         {
@@ -91,8 +98,7 @@ public static class OptionCollectionExtensions
                 ? value.Some()
                 : value.None();
         }
-#if !NET35
-
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
         if (source is IReadOnlyDictionary<TKey, TValue> readOnlyDictionary)
         {
             return readOnlyDictionary.TryGetValue(key, out var value)
@@ -111,7 +117,8 @@ public static class OptionCollectionExtensions
     /// </summary>
     /// <param name="source">The sequence to return the first element from.</param>
     /// <returns>An Option&lt;T&gt; instance containing the first element if present.</returns>
-    public static Option<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> source)
+    [Pure]
+    public static Option<TSource> FirstOrNone<TSource>([InstantHandle] this IEnumerable<TSource> source)
     {
         if (source == null)
         {
@@ -125,7 +132,7 @@ public static class OptionCollectionExtensions
                 return list[0].Some();
             }
         }
-#if !NET35
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
         else if (source is IReadOnlyList<TSource> readOnlyList)
         {
             if (readOnlyList.Count > 0)
@@ -153,7 +160,10 @@ public static class OptionCollectionExtensions
     /// <param name="source">The sequence to return the first element from.</param>
     /// <param name="predicate">The predicate to filter by.</param>
     /// <returns>An Option&lt;T&gt; instance containing the first element if present.</returns>
-    public static Option<TSource> FirstOrNone<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+    [Pure]
+    public static Option<TSource> FirstOrNone<TSource>(
+        [InstantHandle] this IEnumerable<TSource> source,
+        [InstantHandle] Func<TSource, bool> predicate)
     {
         if (source == null)
         {
@@ -181,7 +191,9 @@ public static class OptionCollectionExtensions
     /// </summary>
     /// <param name="source">The sequence to return the last element from.</param>
     /// <returns>An Option&lt;T&gt; instance containing the last element if present.</returns>
-    public static Option<TSource> LastOrNone<TSource>(this IEnumerable<TSource> source)
+    [Pure]
+    [LinqTunnel]
+    public static Option<TSource> LastOrNone<TSource>([InstantHandle] this IEnumerable<TSource> source)
     {
         if (source == null)
         {
@@ -196,7 +208,7 @@ public static class OptionCollectionExtensions
                 return list[count - 1].Some();
             }
         }
-#if !NET35
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
         else if (source is IReadOnlyList<TSource> readOnlyList)
         {
             var count = readOnlyList.Count;
@@ -231,7 +243,10 @@ public static class OptionCollectionExtensions
     /// <param name="source">The sequence to return the last element from.</param>
     /// <param name="predicate">The predicate to filter by.</param>
     /// <returns>An Option&lt;T&gt; instance containing the last element if present.</returns>
-    public static Option<TSource> LastOrNone<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+    [Pure]
+    public static Option<TSource> LastOrNone<TSource>(
+        [InstantHandle] this IEnumerable<TSource> source,
+        [InstantHandle] Func<TSource, bool> predicate)
     {
         if (source == null)
         {
@@ -254,7 +269,7 @@ public static class OptionCollectionExtensions
                 }
             }
         }
-#if !NET35
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
         else if (source is IReadOnlyList<TSource> readOnlyList)
         {
             for (var i = readOnlyList.Count - 1; i >= 0; --i)
@@ -298,7 +313,8 @@ public static class OptionCollectionExtensions
     /// </summary>
     /// <param name="source">The sequence to return the element from.</param>
     /// <returns>An Option&lt;T&gt; instance containing the element if present.</returns>
-    public static Option<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> source)
+    [Pure]
+    public static Option<TSource> SingleOrNone<TSource>([InstantHandle] this IEnumerable<TSource> source)
     {
         if (source == null)
         {
@@ -313,7 +329,7 @@ public static class OptionCollectionExtensions
                 case 1: return list[0].Some();
             }
         }
-#if !NET35
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
         else if (source is IReadOnlyList<TSource> readOnlyList)
         {
             switch (readOnlyList.Count)
@@ -348,7 +364,10 @@ public static class OptionCollectionExtensions
     /// <param name="source">The sequence to return the element from.</param>
     /// <param name="predicate">The predicate to filter by.</param>
     /// <returns>An Option&lt;T&gt; instance containing the element if present.</returns>
-    public static Option<TSource> SingleOrNone<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+    [Pure]
+    public static Option<TSource> SingleOrNone<TSource>(
+        [InstantHandle] this IEnumerable<TSource> source,
+        [InstantHandle] Func<TSource, bool> predicate)
     {
         if (source == null)
         {
@@ -389,7 +408,7 @@ public static class OptionCollectionExtensions
     /// <param name="source">The sequence to return the element from.</param>
     /// <param name="index">The index in the sequence.</param>
     /// <returns>An Option&lt;T&gt; instance containing the element if found.</returns>
-    public static Option<TSource> ElementAtOrNone<TSource>(this IEnumerable<TSource> source, int index)
+    public static Option<TSource> ElementAtOrNone<TSource>([InstantHandle] this IEnumerable<TSource> source, int index)
     {
         if (source == null)
         {
@@ -405,7 +424,7 @@ public static class OptionCollectionExtensions
                     return list[index].Some();
                 }
             }
-#if !NET35
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
             else if (source is IReadOnlyList<TSource> readOnlyList)
             {
                 if (index < readOnlyList.Count)
