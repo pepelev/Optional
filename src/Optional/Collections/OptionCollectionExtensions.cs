@@ -85,7 +85,9 @@ public static class OptionCollectionExtensions
     /// <param name="key">The key to locate.</param>
     /// <returns>An Option&lt;TValue&gt; instance containing the associated value if located.</returns>
     [Pure]
-    public static Option<TValue> GetValueOrNone<TKey, TValue>([InstantHandle] this IEnumerable<KeyValuePair<TKey, TValue>> source, TKey key)
+    public static Option<TValue> GetValueOrNone<TKey, TValue>(
+        [InstantHandle] this IEnumerable<KeyValuePair<TKey, TValue>> source,
+        TKey key)
     {
         if (source == null)
         {
