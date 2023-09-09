@@ -108,6 +108,11 @@ public struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
             return -1;
         }
 
+        if (!HasValue && !other.HasValue)
+        {
+            return 0;
+        }
+
         return Comparer<T>.Default.Compare(value, other.value);
     }
 
