@@ -667,4 +667,5 @@ II.2.12 &lt;HandlesEvent /&gt;&#xD;
 </s:String>
 	<s:Boolean x:Key="/Default/ReSpeller/CheckLocals/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ReSpeller/ReSpellerEnabled/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=corefx/@EntryIndexedValue">True</s:Boolean>
 </wpf:ResourceDictionary>

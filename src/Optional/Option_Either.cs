@@ -5,7 +5,7 @@
 /// </summary>
 /// <typeparam name="T">The type of the value to be wrapped.</typeparam>
 /// <typeparam name="TException">A exceptional value describing the lack of an actual value.</typeparam>
-#if !NETSTANDARD1_0
+#if NET20_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
 [Serializable]
 #endif
 public struct Option<T, TException> : IEquatable<Option<T, TException>>, IComparable<Option<T, TException>>
@@ -33,6 +33,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="other">The optional to compare with the current one.</param>
     /// <returns>A boolean indicating whether or not the optionals are equal.</returns>
+    [Pure]
     public bool Equals(Option<T, TException> other)
     {
         if (!HasValue && !other.HasValue)
@@ -53,6 +54,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="obj">The optional to compare with the current one.</param>
     /// <returns>A boolean indicating whether or not the optionals are equal.</returns>
+    [Pure]
     public override bool Equals(object obj) => obj is Option<T, TException>
         ? Equals((Option<T, TException>)obj)
         : false;
@@ -77,6 +79,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     ///     Generates a hash code for the current optional.
     /// </summary>
     /// <returns>A hash code for the current optional.</returns>
+    [Pure]
     public override int GetHashCode()
     {
         if (HasValue)
@@ -103,6 +106,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="other">The optional to compare with the current one.</param>
     /// <returns>An integer indicating the relative order of the optionals being compared.</returns>
+    [Pure]
     public int CompareTo(Option<T, TException> other)
     {
         if (HasValue && !other.HasValue)
@@ -156,6 +160,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     ///     Returns a string that represents the current optional.
     /// </summary>
     /// <returns>A string that represents the current optional.</returns>
+    [Pure]
     public override string ToString()
     {
         if (HasValue)
@@ -174,6 +179,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     ///     Converts the current optional into an enumerable with one or zero elements.
     /// </summary>
     /// <returns>A corresponding enumerable.</returns>
+    [Pure]
     public IEnumerable<T> ToEnumerable()
     {
         if (HasValue)
@@ -186,6 +192,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     ///     Returns an enumerator for the optional.
     /// </summary>
     /// <returns>The enumerator.</returns>
+    [Pure]
     public IEnumerator<T> GetEnumerator()
     {
         if (HasValue)
@@ -199,6 +206,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="value">The value to locate.</param>
     /// <returns>A boolean indicating whether or not the value was found.</returns>
+    [Pure]
     public bool Contains(T value)
     {
         if (HasValue)
@@ -220,7 +228,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="predicate">The predicate.</param>
     /// <returns>A boolean indicating whether or not the predicate was satisfied.</returns>
-    public bool Exists(Func<T, bool> predicate)
+    [Pure]
+    public bool Exists([InstantHandle] Func<T, bool> predicate)
     {
         if (predicate == null)
         {
@@ -235,6 +244,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="alternative">The alternative value.</param>
     /// <returns>The existing or alternative value.</returns>
+    [Pure]
     public T ValueOr(T alternative) => HasValue
         ? value
         : alternative;
@@ -244,7 +254,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="alternativeFactory">A factory function to create an alternative value.</param>
     /// <returns>The existing or alternative value.</returns>
-    public T ValueOr(Func<T> alternativeFactory)
+    [Pure]
+    public T ValueOr([InstantHandle] Func<T> alternativeFactory)
     {
         if (alternativeFactory == null)
         {
@@ -261,7 +272,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="alternativeFactory">A factory function to map the exceptional value to an alternative value.</param>
     /// <returns>The existing or alternative value.</returns>
-    public T ValueOr(Func<TException, T> alternativeFactory)
+    [Pure]
+    public T ValueOr([InstantHandle] Func<TException, T> alternativeFactory)
     {
         if (alternativeFactory == null)
         {
@@ -278,6 +290,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="alternative">The alternative value.</param>
     /// <returns>A new optional, containing either the existing or alternative value.</returns>
+    [Pure]
     public Option<T, TException> Or(T alternative) => HasValue
         ? this
         : Option.Some<T, TException>(alternative);
@@ -287,7 +300,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="alternativeFactory">A factory function to create an alternative value.</param>
     /// <returns>A new optional, containing either the existing or alternative value.</returns>
-    public Option<T, TException> Or(Func<T> alternativeFactory)
+    [Pure]
+    public Option<T, TException> Or([InstantHandle] Func<T> alternativeFactory)
     {
         if (alternativeFactory == null)
         {
@@ -304,7 +318,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="alternativeFactory">A factory function to map the exceptional value to an alternative value.</param>
     /// <returns>A new optional, containing either the existing or alternative value.</returns>
-    public Option<T, TException> Or(Func<TException, T> alternativeFactory)
+    [Pure]
+    public Option<T, TException> Or([InstantHandle] Func<TException, T> alternativeFactory)
     {
         if (alternativeFactory == null)
         {
@@ -321,7 +336,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="alternativeOption">The alternative optional.</param>
     /// <returns>The alternative optional, if no value is present, otherwise itself.</returns>
-    public Option<T, TException> Else(Option<T, TException> alternativeOption) => HasValue
+    [Pure]
+    public Option<T, TException> Else([InstantHandle] Option<T, TException> alternativeOption) => HasValue
         ? this
         : alternativeOption;
 
@@ -330,7 +346,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="alternativeOptionFactory">A factory function to create an alternative optional.</param>
     /// <returns>The alternative optional, if no value is present, otherwise itself.</returns>
-    public Option<T, TException> Else(Func<Option<T, TException>> alternativeOptionFactory)
+    [Pure]
+    public Option<T, TException> Else([InstantHandle] Func<Option<T, TException>> alternativeOptionFactory)
     {
         if (alternativeOptionFactory == null)
         {
@@ -347,7 +364,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="alternativeOptionFactory">A factory function to map the exceptional value to an alternative optional.</param>
     /// <returns>The alternative optional, if no value is present, otherwise itself.</returns>
-    public Option<T, TException> Else(Func<TException, Option<T, TException>> alternativeOptionFactory)
+    [Pure]
+    public Option<T, TException> Else([InstantHandle] Func<TException, Option<T, TException>> alternativeOptionFactory)
     {
         if (alternativeOptionFactory == null)
         {
@@ -363,6 +381,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     ///     Forgets any attached exceptional value.
     /// </summary>
     /// <returns>An optional without an exceptional value.</returns>
+    [Pure]
     public Option<T> WithoutException()
     {
         return Match(
@@ -377,7 +396,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// <param name="some">The function to evaluate if the value is present.</param>
     /// <param name="none">The function to evaluate if the value is missing.</param>
     /// <returns>The result of the evaluated function.</returns>
-    public TResult Match<TResult>(Func<T, TResult> some, Func<TException, TResult> none)
+    [Pure]
+    public TResult Match<TResult>([InstantHandle] Func<T, TResult> some, [InstantHandle] Func<TException, TResult> none)
     {
         if (some == null)
         {
@@ -399,7 +419,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="some">The action to evaluate if the value is present.</param>
     /// <param name="none">The action to evaluate if the value is missing.</param>
-    public void Match(Action<T> some, Action<TException> none)
+    public void Match([InstantHandle] Action<T> some, [InstantHandle] Action<TException> none)
     {
         if (some == null)
         {
@@ -425,7 +445,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     ///     Evaluates a specified action if a value is present.
     /// </summary>
     /// <param name="some">The action to evaluate if the value is present.</param>
-    public void MatchSome(Action<T> some)
+    public void MatchSome([InstantHandle] Action<T> some)
     {
         if (some == null)
         {
@@ -442,7 +462,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     ///     Evaluates a specified action if no value is present.
     /// </summary>
     /// <param name="none">The action to evaluate if the value is missing.</param>
-    public void MatchNone(Action<TException> none)
+    public void MatchNone([InstantHandle] Action<TException> none)
     {
         if (none == null)
         {
@@ -461,7 +481,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="mapping">The transformation function.</param>
     /// <returns>The transformed optional.</returns>
-    public Option<TResult, TException> Map<TResult>(Func<T, TResult> mapping)
+    [Pure]
+    public Option<TResult, TException> Map<TResult>([InstantHandle] Func<T, TResult> mapping)
     {
         if (mapping == null)
         {
@@ -480,7 +501,9 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="mapping">The transformation function.</param>
     /// <returns>The transformed optional.</returns>
-    public Option<T, TExceptionResult> MapException<TExceptionResult>(Func<TException, TExceptionResult> mapping)
+    [Pure]
+    public Option<T, TExceptionResult> MapException<TExceptionResult>(
+        [InstantHandle] Func<TException, TExceptionResult> mapping)
     {
         if (mapping == null)
         {
@@ -500,7 +523,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// </summary>
     /// <param name="mapping">The transformation function.</param>
     /// <returns>The transformed optional.</returns>
-    public Option<TResult, TException> FlatMap<TResult>(Func<T, Option<TResult, TException>> mapping)
+    [Pure]
+    public Option<TResult, TException> FlatMap<TResult>([InstantHandle] Func<T, Option<TResult, TException>> mapping)
     {
         if (mapping == null)
         {
@@ -522,7 +546,10 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// <param name="mapping">The transformation function.</param>
     /// <param name="exception">The exceptional value to attach.</param>
     /// <returns>The transformed optional.</returns>
-    public Option<TResult, TException> FlatMap<TResult>(Func<T, Option<TResult>> mapping, TException exception)
+    [Pure]
+    public Option<TResult, TException> FlatMap<TResult>(
+        [InstantHandle] Func<T, Option<TResult>> mapping,
+        TException exception)
     {
         if (mapping == null)
         {
@@ -541,7 +568,10 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// <param name="mapping">The transformation function.</param>
     /// <param name="exceptionFactory">A factory function to create an exceptional value to attach.</param>
     /// <returns>The transformed optional.</returns>
-    public Option<TResult, TException> FlatMap<TResult>(Func<T, Option<TResult>> mapping, Func<TException> exceptionFactory)
+    [Pure]
+    public Option<TResult, TException> FlatMap<TResult>(
+        [InstantHandle] Func<T, Option<TResult>> mapping,
+        [InstantHandle] Func<TException> exceptionFactory)
     {
         if (mapping == null)
         {
@@ -563,6 +593,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// <param name="condition">The condition.</param>
     /// <param name="exception">The exceptional value to attach.</param>
     /// <returns>The filtered optional.</returns>
+    [Pure]
     public Option<T, TException> Filter(bool condition, TException exception) =>
         HasValue && !condition
             ? Option.None<T, TException>(exception)
@@ -575,7 +606,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// <param name="condition">The condition.</param>
     /// <param name="exceptionFactory">A factory function to create an exceptional value to attach.</param>
     /// <returns>The filtered optional.</returns>
-    public Option<T, TException> Filter(bool condition, Func<TException> exceptionFactory)
+    [Pure]
+    public Option<T, TException> Filter(bool condition, [InstantHandle] Func<TException> exceptionFactory)
     {
         if (exceptionFactory == null)
         {
@@ -594,7 +626,8 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// <param name="predicate">The predicate.</param>
     /// <param name="exception">The exceptional value to attach.</param>
     /// <returns>The filtered optional.</returns>
-    public Option<T, TException> Filter(Func<T, bool> predicate, TException exception)
+    [Pure]
+    public Option<T, TException> Filter([InstantHandle] Func<T, bool> predicate, TException exception)
     {
         if (predicate == null)
         {
@@ -613,7 +646,10 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
     /// <param name="predicate">The predicate.</param>
     /// <param name="exceptionFactory">A factory function to create an exceptional value to attach.</param>
     /// <returns>The filtered optional.</returns>
-    public Option<T, TException> Filter(Func<T, bool> predicate, Func<TException> exceptionFactory)
+    [Pure]
+    public Option<T, TException> Filter(
+        [InstantHandle] Func<T, bool> predicate,
+        [InstantHandle] Func<TException> exceptionFactory)
     {
         if (predicate == null)
         {
