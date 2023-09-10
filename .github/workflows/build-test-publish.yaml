@@ -43,7 +43,9 @@ jobs:
 
     - name: Push package
       shell: bash
-      run: dotnet nuget push nuget/*.nupkg --source 'https://api.nuget.org/v3/index.json' --api-key 'abc' --skip-duplicate
+      env:
+        NUGETKEY: ${{ secrets.NUGETKEY }}
+      run: dotnet nuget push nuget/*.nupkg --source 'https://api.nuget.org/v3/index.json' --api-key "$NUGETKEY" --skip-duplicate
 
     - name: Create tag
       shell: bash
