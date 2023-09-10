@@ -29,14 +29,21 @@ jobs:
     - name: Test
       run: dotnet test --configuration Release --no-restore --no-build --verbosity normal Optional.Tests
 
-    - name: Publish on version change
-      id: publish_nuget
-      uses: rohith/publish-nuget@v2
-      with:
-        PROJECT_FILE_PATH: src/Optional/Optional.csproj
-        VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
-        TAG_COMMIT: true
-        TAG_FORMAT: v*
-        NUGET_KEY: ${{secrets.NUGETKEY}}
-        NUGET_SOURCE: https://api.nuget.org
-        INCLUDE_SYMBOLS: true
+    - name: Extract version from csproj
+      shell: bash
+      run: |
+        Version=$(grep --only-matching --perl-regex '<Version>[0-9]+(\.[0-9]+)*</Version>' Optional/Optional.csproj | grep --only-matching --perl-regex '[0-9\.]+')
+        echo "Version=$Version" | tee --append "$GITHUB_ENV"
+        exit $(test -n "$Version")
+
+    - name: Pack package
+      shell: bash
+      run: dotnet pack Options --configuration Release --no-build --include-symbols --nologo --output nuget
+
+    - name: Push package
+      shell: bash
+      run: dotnet nuget push nuget/*.nupkg --api-key 'abc' --skip-duplicate
+
+    - name: Create tag
+      shell: bash
+      run: git tag "$Version" && git push origin "$Version"
