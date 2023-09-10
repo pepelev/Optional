@@ -41,7 +41,7 @@ jobs:
           echo 'Could not get version from .csproj'
           exit 1
         fi
-        git tag --list
+        git fetch --tags
         if test -n "$(git tag --list "$Version" | tr -d '[:space:]')"; then
           echo "Version $Version already exists"
           exit 0
