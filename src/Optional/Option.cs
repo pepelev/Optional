@@ -36,7 +36,6 @@ public static class Option
         new(value: default!, exception, hasValue: false);
 
 #if NET7_0_OR_GREATER
-
     /// <summary>
     ///     Creates an Option&lt;T&gt; instance from a parsing result.
     /// </summary>

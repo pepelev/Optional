@@ -319,13 +319,9 @@ public struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
     /// <param name="exception">The exceptional value to attach.</param>
     /// <returns>An optional with an exceptional value.</returns>
     [Pure]
-    public Option<T, TException> WithException<TException>(TException exception)
-    {
-        return Match(
-            Option.Some<T, TException>,
-            () => Option.None<T, TException>(exception)
-        );
-    }
+    public Option<T, TException> WithException<TException>(TException exception) => HasValue
+        ? Option.Some<T, TException>(value)
+        : Option.None<T, TException>(exception);
 
     /// <summary>
     ///     Attaches an exceptional value to an empty optional.
@@ -340,10 +336,9 @@ public struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
             throw new ArgumentNullException(nameof(exceptionFactory));
         }
 
-        return Match(
-            Option.Some<T, TException>,
-            () => Option.None<T, TException>(exceptionFactory())
-        );
+        return HasValue
+            ? Option.Some<T, TException>(value)
+            : Option.None<T, TException>(exceptionFactory());
     }
 
     /// <summary>
@@ -445,10 +440,9 @@ public struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
             throw new ArgumentNullException(nameof(mapping));
         }
 
-        return Match(
-            value => Option.Some(mapping(value)),
-            Option.None<TResult>
-        );
+        return HasValue
+            ? Option.Some(mapping(value))
+            : Option.None<TResult>();
     }
 
     /// <summary>
@@ -488,7 +482,9 @@ public struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
             throw new ArgumentNullException(nameof(mapping));
         }
 
-        return FlatMap(value => mapping(value).WithoutException());
+        return HasValue
+            ? mapping(value).WithoutException()
+            : Option.None<TResult>();
     }
 
     /// <summary>
