@@ -76,7 +76,7 @@ public readonly struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
     [Pure]
     public override int GetHashCode() => HasValue
         ? EqualityComparer<T>.Default.GetHashCode(value)
-        : 0;
+        : 11;
 
     /// <summary>
     ///     Compares the relative order of two optionals. An empty optional is
