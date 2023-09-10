@@ -7,7 +7,7 @@
 #if NET20_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
 [Serializable]
 #endif
-public struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
+public readonly struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
 {
     private readonly T value;
 

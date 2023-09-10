@@ -8,7 +8,7 @@
 #if NET20_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
 [Serializable]
 #endif
-public struct Option<T, TException> : IEquatable<Option<T, TException>>, IComparable<Option<T, TException>>
+public readonly struct Option<T, TException> : IEquatable<Option<T, TException>>, IComparable<Option<T, TException>>
 {
     private readonly T value;
     private readonly TException exception;
