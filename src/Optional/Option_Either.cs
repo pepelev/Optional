@@ -487,10 +487,9 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
             throw new ArgumentNullException(nameof(mapping));
         }
 
-        return Match(
-            value => Option.Some<TResult, TException>(mapping(value)),
-            Option.None<TResult, TException>
-        );
+        return HasValue
+            ? Option.Some<TResult, TException>(mapping(value))
+            : Option.None<TResult, TException>(exception);
     }
 
     /// <summary>
@@ -508,10 +507,9 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
             throw new ArgumentNullException(nameof(mapping));
         }
 
-        return Match(
-            Option.Some<T, TExceptionResult>,
-            exception => Option.None<T, TExceptionResult>(mapping(exception))
-        );
+        return HasValue
+            ? Option.Some<T, TExceptionResult>(value)
+            : Option.None<T, TExceptionResult>(mapping(exception));
     }
 
     /// <summary>
@@ -554,7 +552,9 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
             throw new ArgumentNullException(nameof(mapping));
         }
 
-        return FlatMap(value => mapping(value).WithException(exception));
+        return HasValue
+            ? mapping(value).WithException(exception)
+            : Option.None<TResult, TException>(this.exception);
     }
 
     /// <summary>
@@ -581,7 +581,9 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
             throw new ArgumentNullException(nameof(exceptionFactory));
         }
 
-        return FlatMap(value => mapping(value).WithException(exceptionFactory));
+        return HasValue
+            ? mapping(value).WithException(exceptionFactory)
+            : Option.None<TResult, TException>(exception);
     }
 
     /// <summary>
