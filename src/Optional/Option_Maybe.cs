@@ -74,20 +74,9 @@ public readonly struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
     /// </summary>
     /// <returns>A hash code for the current optional.</returns>
     [Pure]
-    public override int GetHashCode()
-    {
-        if (HasValue)
-        {
-            if (value == null)
-            {
-                return 1;
-            }
-
-            return value.GetHashCode();
-        }
-
-        return 0;
-    }
+    public override int GetHashCode() => HasValue
+        ? EqualityComparer<T>.Default.GetHashCode(value)
+        : 0;
 
     /// <summary>
     ///     Compares the relative order of two optionals. An empty optional is
@@ -194,23 +183,10 @@ public readonly struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
     /// <summary>
     ///     Determines if the current optional contains a specified value.
     /// </summary>
-    /// <param name="value">The value to locate.</param>
+    /// <param name="expectation">The value to locate.</param>
     /// <returns>A boolean indicating whether or not the value was found.</returns>
     [Pure]
-    public bool Contains(T value)
-    {
-        if (HasValue)
-        {
-            if (this.value == null)
-            {
-                return value == null;
-            }
-
-            return this.value.Equals(value);
-        }
-
-        return false;
-    }
+    public bool Contains(T expectation) => HasValue && EqualityComparer<T>.Default.Equals(value, expectation);
 
     /// <summary>
     ///     Determines if the current optional contains a value

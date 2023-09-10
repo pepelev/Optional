@@ -78,25 +78,9 @@ public readonly struct Option<T, TException> : IEquatable<Option<T, TException>>
     /// </summary>
     /// <returns>A hash code for the current optional.</returns>
     [Pure]
-    public override int GetHashCode()
-    {
-        if (HasValue)
-        {
-            if (value == null)
-            {
-                return 1;
-            }
-
-            return value.GetHashCode();
-        }
-
-        if (exception == null)
-        {
-            return 0;
-        }
-
-        return exception.GetHashCode();
-    }
+    public override int GetHashCode() => HasValue
+        ? EqualityComparer<T>.Default.GetHashCode(value)
+        : EqualityComparer<TException>.Default.GetHashCode(exception);
 
     /// <summary>
     ///     Compares the relative order of two optionals. An empty optional is
@@ -202,23 +186,10 @@ public readonly struct Option<T, TException> : IEquatable<Option<T, TException>>
     /// <summary>
     ///     Determines if the current optional contains a specified value.
     /// </summary>
-    /// <param name="value">The value to locate.</param>
+    /// <param name="expectation">The value to locate.</param>
     /// <returns>A boolean indicating whether or not the value was found.</returns>
     [Pure]
-    public bool Contains(T value)
-    {
-        if (HasValue)
-        {
-            if (this.value == null)
-            {
-                return value == null;
-            }
-
-            return this.value.Equals(value);
-        }
-
-        return false;
-    }
+    public bool Contains(T expectation) => HasValue && EqualityComparer<T>.Default.Equals(value, expectation);
 
     /// <summary>
     ///     Determines if the current optional contains a value
@@ -542,19 +513,19 @@ public readonly struct Option<T, TException> : IEquatable<Option<T, TException>>
     ///     with a specified exceptional value.
     /// </summary>
     /// <param name="mapping">The transformation function.</param>
-    /// <param name="exception">The exceptional value to attach.</param>
+    /// <param name="fallback">The exceptional value to attach.</param>
     /// <returns>The transformed optional.</returns>
     [Pure]
     public Option<TResult, TException> FlatMap<TResult>(
         [InstantHandle] Func<T, Option<TResult>> mapping,
-        TException exception)
+        TException fallback)
     {
         if (mapping == null)
         {
             throw new ArgumentNullException(nameof(mapping));
         }
 
-        return FlatMap(value => mapping(value).WithException(exception));
+        return FlatMap(value => mapping(value).WithException(fallback));
     }
 
     /// <summary>
@@ -589,12 +560,12 @@ public readonly struct Option<T, TException> : IEquatable<Option<T, TException>>
     ///     if a specified condition is not satisfied.
     /// </summary>
     /// <param name="condition">The condition.</param>
-    /// <param name="exception">The exceptional value to attach.</param>
+    /// <param name="fallback">The exceptional value to attach.</param>
     /// <returns>The filtered optional.</returns>
     [Pure]
-    public Option<T, TException> Filter(bool condition, TException exception) =>
+    public Option<T, TException> Filter(bool condition, TException fallback) =>
         HasValue && !condition
-            ? Option.None<T, TException>(exception)
+            ? Option.None<T, TException>(fallback)
             : this;
 
     /// <summary>
@@ -622,10 +593,10 @@ public readonly struct Option<T, TException> : IEquatable<Option<T, TException>>
     ///     if a specified predicate is not satisfied.
     /// </summary>
     /// <param name="predicate">The predicate.</param>
-    /// <param name="exception">The exceptional value to attach.</param>
+    /// <param name="fallback">The exceptional value to attach.</param>
     /// <returns>The filtered optional.</returns>
     [Pure]
-    public Option<T, TException> Filter([InstantHandle] Func<T, bool> predicate, TException exception)
+    public Option<T, TException> Filter([InstantHandle] Func<T, bool> predicate, TException fallback)
     {
         if (predicate == null)
         {
@@ -633,7 +604,7 @@ public readonly struct Option<T, TException> : IEquatable<Option<T, TException>>
         }
 
         return HasValue && !predicate(value)
-            ? Option.None<T, TException>(exception)
+            ? Option.None<T, TException>(fallback)
             : this;
     }
 
