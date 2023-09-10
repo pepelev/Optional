@@ -39,11 +39,11 @@ jobs:
 
     - name: Pack package
       shell: bash
-      run: dotnet pack Optional --configuration Release --no-build --source 'https://api.nuget.org/v3/index.json' --include-symbols --nologo --output nuget
+      run: dotnet pack Optional --configuration Release --no-build --include-symbols --nologo --output nuget
 
     - name: Push package
       shell: bash
-      run: dotnet nuget push nuget/*.nupkg --api-key 'abc' --skip-duplicate
+      run: dotnet nuget push nuget/*.nupkg --source 'https://api.nuget.org/v3/index.json' --api-key 'abc' --skip-duplicate
 
     - name: Create tag
       shell: bash
