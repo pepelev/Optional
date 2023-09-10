@@ -3,7 +3,7 @@ name: Build and test
 on:
   workflow_dispatch:
   pull_request:
-    branches: [ develop, master ]
+    branches: [ develop, develop-v4, develop-v5, master ]
 defaults:
   run:
     working-directory: ./src
