@@ -39,7 +39,7 @@ jobs:
 
     - name: Pack package
       shell: bash
-      run: dotnet pack Optional --configuration Release --no-build --include-symbols --nologo --output nuget
+      run: dotnet pack Optional --configuration Release --no-build --source 'https://api.nuget.org/v3/index.json' --include-symbols --nologo --output nuget
 
     - name: Push package
       shell: bash
