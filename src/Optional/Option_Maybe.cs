@@ -446,7 +446,7 @@ public struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
         }
 
         return Match(
-            value => Option.Some(mapping(value)),
+            val => Option.Some(mapping(val)),
             Option.None<TResult>
         );
     }
@@ -488,7 +488,7 @@ public struct Option<T> : IEquatable<Option<T>>, IComparable<Option<T>>
             throw new ArgumentNullException(nameof(mapping));
         }
 
-        return FlatMap(value => mapping(value).WithoutException());
+        return FlatMap(val => mapping(val).WithoutException());
     }
 
     /// <summary>

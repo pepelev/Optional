@@ -488,7 +488,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
         }
 
         return Match(
-            value => Option.Some<TResult, TException>(mapping(value)),
+            val => Option.Some<TResult, TException>(mapping(val)),
             Option.None<TResult, TException>
         );
     }
@@ -510,7 +510,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
 
         return Match(
             Option.Some<T, TExceptionResult>,
-            exception => Option.None<T, TExceptionResult>(mapping(exception))
+            exc => Option.None<T, TExceptionResult>(mapping(exc))
         );
     }
 
@@ -554,7 +554,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
             throw new ArgumentNullException(nameof(mapping));
         }
 
-        return FlatMap(value => mapping(value).WithException(exception));
+        return FlatMap(val => mapping(val).WithException(exception));
     }
 
     /// <summary>
@@ -581,7 +581,7 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
             throw new ArgumentNullException(nameof(exceptionFactory));
         }
 
-        return FlatMap(value => mapping(value).WithException(exceptionFactory));
+        return FlatMap(val => mapping(val).WithException(exceptionFactory));
     }
 
     /// <summary>
