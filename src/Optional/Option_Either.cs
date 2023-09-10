@@ -80,7 +80,7 @@ public readonly struct Option<T, TException> : IEquatable<Option<T, TException>>
     [Pure]
     public override int GetHashCode() => HasValue
         ? EqualityComparer<T>.Default.GetHashCode(value)
-        : EqualityComparer<TException>.Default.GetHashCode(exception);
+        : EqualityComparer<TException>.Default.GetHashCode(exception) ^ 7;
 
     /// <summary>
     ///     Compares the relative order of two optionals. An empty optional is
