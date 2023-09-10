@@ -19,11 +19,16 @@ public static class OptionCollectionExtensions
             throw new ArgumentNullException(nameof(source));
         }
 
-        foreach (var option in source)
+        return Yield();
+
+        IEnumerable<T> Yield()
         {
-            if (option.HasValue)
+            foreach (var option in source)
             {
-                yield return option.Value;
+                if (option.HasValue)
+                {
+                    yield return option.Value;
+                }
             }
         }
     }
@@ -43,11 +48,16 @@ public static class OptionCollectionExtensions
             throw new ArgumentNullException(nameof(source));
         }
 
-        foreach (var option in source)
+        return Yield();
+
+        IEnumerable<T> Yield()
         {
-            if (option.HasValue)
+            foreach (var option in source)
             {
-                yield return option.Value;
+                if (option.HasValue)
+                {
+                    yield return option.Value;
+                }
             }
         }
     }
@@ -67,11 +77,16 @@ public static class OptionCollectionExtensions
             throw new ArgumentNullException(nameof(source));
         }
 
-        foreach (var option in source)
+        return Yield();
+
+        IEnumerable<TException> Yield()
         {
-            if (!option.HasValue)
+            foreach (var option in source)
             {
-                yield return option.Exception;
+                if (!option.HasValue)
+                {
+                    yield return option.Exception;
+                }
             }
         }
     }
