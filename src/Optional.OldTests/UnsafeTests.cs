@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Optional.Unsafe;
 
 namespace Optional.Tests
@@ -10,20 +9,20 @@ namespace Optional.Tests
         [TestMethod]
         public void Maybe_ToNullable()
         {
-            Assert.AreEqual(default(int?), Option.None<int>().ToNullable());
+            Assert.AreEqual(default, Option.None<int>().ToNullable());
             Assert.AreEqual(1, Option.Some(1).ToNullable());
         }
 
         [TestMethod]
         public void Maybe_GetValueOrDefault()
         {
-            Assert.AreEqual(default(int), Option.None<int>().ValueOrDefault());
+            Assert.AreEqual(default, Option.None<int>().ValueOrDefault());
             Assert.AreEqual(1, Option.Some(1).ValueOrDefault());
 
-            Assert.AreEqual(default(int?), Option.None<int?>().ValueOrDefault());
+            Assert.AreEqual(default, Option.None<int?>().ValueOrDefault());
             Assert.AreEqual(1, Option.Some<int?>(1).ValueOrDefault());
 
-            Assert.AreEqual(default(string), Option.None<string>().ValueOrDefault());
+            Assert.AreEqual(default, Option.None<string>().ValueOrDefault());
             Assert.AreEqual("a", Option.Some("a").ValueOrDefault());
         }
 
@@ -69,27 +68,27 @@ namespace Optional.Tests
         [TestMethod]
         public void Either_ToNullable()
         {
-            Assert.AreEqual(default(int?), Option.None<int, bool>(false).ToNullable());
+            Assert.AreEqual(default, Option.None<int, bool>(false).ToNullable());
             Assert.AreEqual(1, Option.Some<int, bool>(1).ToNullable());
         }
 
         [TestMethod]
         public void Either_GetValueOrDefault()
         {
-            Assert.AreEqual(default(int), Option.None<int, bool>(false).ValueOrDefault());
+            Assert.AreEqual(default, Option.None<int, bool>(false).ValueOrDefault());
             Assert.AreEqual(1, Option.Some<int, bool>(1).ValueOrDefault());
 
-            Assert.AreEqual(default(int?), Option.None<int?, bool>(false).ValueOrDefault());
+            Assert.AreEqual(default, Option.None<int?, bool>(false).ValueOrDefault());
             Assert.AreEqual(1, Option.Some<int?, bool>(1).ValueOrDefault());
 
-            Assert.AreEqual(default(string), Option.None<string, bool>(false).ValueOrDefault());
+            Assert.AreEqual(default, Option.None<string, bool>(false).ValueOrDefault());
             Assert.AreEqual("a", Option.Some<string, bool>("a").ValueOrDefault());
         }
 
         [TestMethod]
         public void Either_GetUnsafeValue()
         {
-            var none = "a".None<string, string>("ex");
+            var none = "a".None("ex");
             var some = "a".Some<string, string>();
 
             Assert.AreEqual("a", some.ValueOrFailure());

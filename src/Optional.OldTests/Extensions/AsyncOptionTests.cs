@@ -8,7 +8,7 @@
 //using System.Threading.Tasks;
 //using Optional.Async;
 
-//namespace Optional.Tests.Extensions
+//namespace Optional.OldTests.Extensions
 //{
 //    [TestClass]
 //    public class AsyncOptionTests
@@ -18,7 +18,6 @@
 //        {
 //            var some1 = new AsyncOption<string>(Task.FromResult(Option.Some<string>("abc")));
 //            var none1 = new AsyncOption<string>(Task.FromResult(Option.None<string>()));
-
 
 //            var some2a = Option.Some<string>("abc").ToAsyncOption();
 //            var none2a = Option.None<string>().ToAsyncOption();
@@ -389,3 +388,4 @@
 //}
 
 //#endif
+

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Optional.Linq;
 
 namespace Optional.Tests
@@ -83,10 +82,10 @@ namespace Optional.Tests
         [TestMethod]
         public void Either_LinqTransformations()
         {
-            var none = "a".None<string, string>("ex");
+            var none = "a".None("ex");
             var some = "a".Some<string, string>();
 
-            var noneNull = ((string)null).None<string, string>("ex");
+            var noneNull = ((string)null).None("ex");
             var someNull = ((string)null).Some<string, string>();
 
             var noneUpper =
@@ -104,22 +103,22 @@ namespace Optional.Tests
 
             var noneNotNull =
                 from x in none
-                from y in x.SomeNotNull<string, string>("ex1")
+                from y in x.SomeNotNull("ex1")
                 select y;
 
             var someNotNull =
                 from x in some
-                from y in x.SomeNotNull<string, string>("ex1")
+                from y in x.SomeNotNull("ex1")
                 select y;
 
             var noneNullNotNull =
                 from x in noneNull
-                from y in x.SomeNotNull<string, string>("ex1")
+                from y in x.SomeNotNull("ex1")
                 select y;
 
             var someNullNotNull =
                 from x in someNull
-                from y in x.SomeNotNull<string, string>("ex1")
+                from y in x.SomeNotNull("ex1")
                 select y;
 
             Assert.IsFalse(noneNotNull.HasValue);

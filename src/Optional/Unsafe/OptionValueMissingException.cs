@@ -1,19 +1,16 @@
-﻿using System;
+﻿namespace Optional.Unsafe;
 
-namespace Optional.Unsafe
+/// <summary>
+///     Indicates a failed retrieval of a value from an empty optional.
+/// </summary>
+public sealed class OptionValueMissingException : Exception
 {
-    /// <summary>
-    /// Indicates a failed retrieval of a value from an empty optional.
-    /// </summary>
-    public sealed class OptionValueMissingException : Exception
+    public OptionValueMissingException()
     {
-        public OptionValueMissingException()
-        {
-        }
+    }
 
-        public OptionValueMissingException(string message)
-            : base(message)
-        {
-        }
+    public OptionValueMissingException(string message)
+        : base(message)
+    {
     }
 }
