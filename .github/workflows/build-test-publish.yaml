@@ -35,12 +35,13 @@ jobs:
       env:
         NUGETKEY: ${{ secrets.NUGETKEY }}
       run: |
-        Version=$(grep --only-matching --perl-regex '<Version>[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z-]+)?</Version>' Optional/Optional.csproj | grep --only-matching --perl-regex '[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z-]+)')
+        Version=$(grep --only-matching --perl-regex '<Version>[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z-]+)?</Version>' Optional/Optional.csproj | grep --only-matching --perl-regex '[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z-]+)?')
         echo "Version=$Version"
         if test -z "$Version"; then
           echo 'Could not get version from .csproj'
           exit 1
         fi
+        git fetch --tags
         if test -n "$(git tag --list "$Version" | tr -d '[:space:]')"; then
           echo "Version $Version already exists"
           exit 0
