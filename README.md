@@ -19,7 +19,7 @@ Optional is a strongly typed alternative to null values that lets you:
 
 ## Installation
 
-`PM> Install-Package Optional`
+`PM> Install-Package Optional2`
 
 [NuGet package](https://www.nuget.org/packages/Optional2/). Supports **.NET 3.5+** and **.NET** (.NET Standard 1.0+)
 
