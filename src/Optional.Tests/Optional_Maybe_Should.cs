@@ -1,5 +1,7 @@
+#if NET7_0_OR_GREATER
 using System.Globalization;
 using System.Numerics;
+#endif
 using Optional.Unsafe;
 
 namespace Optional.Tests;
@@ -44,7 +46,19 @@ public sealed class Optional_Maybe_Should
 
     #region Equality
 
-    private sealed record EqualityCase(Option<int> A, Option<int> B, bool Expectation);
+    private sealed class EqualityCase
+    {
+        public EqualityCase(Option<int> A, Option<int> B, bool Expectation)
+        {
+            this.A = A;
+            this.B = B;
+            this.Expectation = Expectation;
+        }
+
+        public Option<int> A { get; }
+        public Option<int> B { get; }
+        public bool Expectation { get; }
+    }
 
     private static readonly EqualityCase[] equalityCases =
     {
@@ -89,9 +103,19 @@ public sealed class Optional_Maybe_Should
 
     #region Order
 
-    private sealed record OrderCase(Option<int> A, Option<int> B, int Expectation)
+    private sealed class OrderCase
     {
+        public OrderCase(Option<int> A, Option<int> B, int Expectation)
+        {
+            this.A = A;
+            this.B = B;
+            this.Expectation = Expectation;
+        }
+
         public OrderCase Flip() => new(B, A, -Expectation);
+        public Option<int> A { get; }
+        public Option<int> B { get; }
+        public int Expectation { get; }
     }
 
     private static readonly OrderCase[] orderCases =
@@ -146,6 +170,7 @@ public sealed class Optional_Maybe_Should
 
     #region Parsing
 
+#if NET7_0_OR_GREATER
     [Test]
     public void Be_Parsed()
     {
@@ -177,6 +202,7 @@ public sealed class Optional_Maybe_Should
 
         option.Should().Be(0.1f.Some());
     }
+#endif
 
     #endregion
 }
