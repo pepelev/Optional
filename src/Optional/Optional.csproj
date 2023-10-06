@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net35;net40;net45;netstandard1.0;netstandard2.0;netcoreapp2.0;net7.0</TargetFrameworks>
+        <TargetFrameworks>net35;net40;net45;netstandard1.0;netstandard2.0;netstandard2.1;net6;net7.0</TargetFrameworks>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
         <NoWarn>1591;NETSDK1138</NoWarn>
@@ -28,7 +28,7 @@
         <Title>Optional2: A robust option type</Title>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
         <FileVersion>4.0.0</FileVersion>
-        <Version>4.2.0</Version>
+        <Version>4.3.0</Version>
         <Authors>Nils Lück, Alexey Pepelev</Authors>
         <Product>Optional2</Product>
         <PackageReadmeFile>README.md</PackageReadmeFile>
