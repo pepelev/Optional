@@ -447,15 +447,6 @@ public static class OptionCollectionExtensions
                 ? iList[index].Some()
                 : Option.None<TSource>();
         }
-#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
-
-        if (source is IReadOnlyList<TSource> readOnlyList)
-        {
-            return index < readOnlyList.Count
-                ? readOnlyList[index].Some()
-                : Option.None<TSource>();
-        }
-#endif
 
         foreach (var item in source)
         {
@@ -511,15 +502,6 @@ public static class OptionCollectionExtensions
             var offset = index.GetOffset(count);
             return 0 <= offset && offset < count
                 ? IList[offset].Some()
-                : Option.None<TSource>();
-        }
-
-        if (source is IReadOnlyList<TSource> readOnlyList)
-        {
-            var count = readOnlyList.Count;
-            var offset = index.GetOffset(count);
-            return 0 <= offset && offset < count
-                ? readOnlyList[offset].Some()
                 : Option.None<TSource>();
         }
 
