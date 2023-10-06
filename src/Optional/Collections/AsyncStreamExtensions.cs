@@ -1,6 +1,4 @@
 ﻿#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
-using System;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -114,7 +112,7 @@ public static class AsyncStreamExtensions
     ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
     /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the first element if present.</returns>
-    public static async Task<Option<TSource>> FirstOrNone<TSource>(
+    public static async Task<Option<TSource>> FirstOrNoneAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         CancellationToken token = default,
         bool continueOnCapturedContext = false)
@@ -141,7 +139,7 @@ public static class AsyncStreamExtensions
     ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
     /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the last element if present.</returns>
-    public static async Task<Option<TSource>> LastOrNone<TSource>(
+    public static async Task<Option<TSource>> LastOrNoneAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         CancellationToken token = default,
         bool continueOnCapturedContext = false)
@@ -170,7 +168,7 @@ public static class AsyncStreamExtensions
     ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
     /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the element if present.</returns>
-    public static async Task<Option<TSource>> SingleOrNone<TSource>(
+    public static async Task<Option<TSource>> SingleOrNoneAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         CancellationToken token = default,
         bool continueOnCapturedContext = false)
@@ -204,12 +202,15 @@ public static class AsyncStreamExtensions
     ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
     /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the element if found.</returns>
-    public static async Task<Option<TSource>> ElementAtOrNone<TSource>(
+    public static async Task<Option<TSource>> ElementAtOrNoneAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         Index index,
         CancellationToken token = default,
         bool continueOnCapturedContext = false)
     {
+        //            values: __ 10 20 30 40 50 __
+        // start based index: -1  0  1  2  3  4  5
+        //   end based index: ^6 ^5 ^4 ^3 ^2 ^1 ^0
         if (source == null)
         {
             throw new ArgumentNullException(nameof(source));
@@ -217,7 +218,12 @@ public static class AsyncStreamExtensions
 
         if (index.IsFromEnd)
         {
-            var capacity = index.Value + 1;
+            var capacity = index.Value;
+            if (capacity == 0)
+            {
+                return Option.None<TSource>();
+            }
+
             var buffer = new Queue<TSource>(capacity);
             await foreach (var item in source.WithCancellation(token).ConfigureAwait(continueOnCapturedContext))
             {
@@ -248,5 +254,4 @@ public static class AsyncStreamExtensions
         return Option.None<TSource>();
     }
 }
-
 #endif

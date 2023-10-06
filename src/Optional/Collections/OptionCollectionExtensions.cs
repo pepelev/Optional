@@ -1,5 +1,7 @@
 ﻿// Note: Several of the below implementations are closely inspired by the corefx source code for FirstOrDefault, etc.
 
+using System.Linq;
+
 namespace Optional.Collections;
 
 public static class OptionCollectionExtensions
@@ -417,39 +419,163 @@ public static class OptionCollectionExtensions
             throw new ArgumentNullException(nameof(source));
         }
 
-        if (index >= 0)
+        if (index < 0)
         {
-            if (source is IList<TSource> list)
-            {
-                if (index < list.Count)
-                {
-                    return list[index].Some();
-                }
-            }
-#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
-            else if (source is IReadOnlyList<TSource> readOnlyList)
-            {
-                if (index < readOnlyList.Count)
-                {
-                    return readOnlyList[index].Some();
-                }
-            }
-#endif
-            else
-            {
-                using var enumerator = source.GetEnumerator();
-                while (enumerator.MoveNext())
-                {
-                    if (index == 0)
-                    {
-                        return enumerator.Current.Some();
-                    }
+            return Option.None<TSource>();
+        }
 
-                    index--;
-                }
+        if (source.GetType() == typeof(List<TSource>))
+        {
+            var list = (List<TSource>)source;
+            return index < list.Count
+                ? list[index].Some()
+                : Option.None<TSource>();
+        }
+
+#if NET35_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NETCOREAPP2_0_OR_GREATER
+        if (typeof(TSource).IsValueType && source is TSource[] array)
+        {
+            return index < array.Length
+                ? array[index].Some()
+                : Option.None<TSource>();
+        }
+#endif
+
+        if (source is IList<TSource> iList)
+        {
+            return index < iList.Count
+                ? iList[index].Some()
+                : Option.None<TSource>();
+        }
+#if NET45_OR_GREATER || NETSTANDARD1_0_OR_GREATER || NETCOREAPP1_0_OR_GREATER
+
+        if (source is IReadOnlyList<TSource> readOnlyList)
+        {
+            return index < readOnlyList.Count
+                ? readOnlyList[index].Some()
+                : Option.None<TSource>();
+        }
+#endif
+
+        foreach (var item in source)
+        {
+            if (index == 0)
+            {
+                return item.Some();
             }
+
+            index--;
         }
 
         return Option.None<TSource>();
     }
+
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+    /// <summary>
+    ///     Returns an element at a specified position in a sequence if such exists.
+    /// </summary>
+    /// <param name="source">The sequence to return the element from.</param>
+    /// <param name="index">The index in the sequence.</param>
+    /// <returns>An Option&lt;T&gt; instance containing the element if found.</returns>
+    public static Option<TSource> ElementAtOrNone<TSource>(
+        [InstantHandle] this IEnumerable<TSource> source,
+        Index index)
+    {
+        if (source == null)
+        {
+            throw new ArgumentNullException(nameof(source));
+        }
+
+        if (source.GetType() == typeof(List<TSource>))
+        {
+            var list = (List<TSource>)source;
+            var count = list.Count;
+            var offset = index.GetOffset(count);
+            return 0 <= offset && offset < count
+                ? list[offset].Some()
+                : Option.None<TSource>();
+        }
+
+        if (typeof(TSource).IsValueType && source is TSource[] array)
+        {
+            var count = array.Length;
+            var offset = index.GetOffset(count);
+            return 0 <= offset && offset < count
+                ? array[offset].Some()
+                : Option.None<TSource>();
+        }
+
+        if (source is IList<TSource> IList)
+        {
+            var count = IList.Count;
+            var offset = index.GetOffset(count);
+            return 0 <= offset && offset < count
+                ? IList[offset].Some()
+                : Option.None<TSource>();
+        }
+
+        if (source is IReadOnlyList<TSource> readOnlyList)
+        {
+            var count = readOnlyList.Count;
+            var offset = index.GetOffset(count);
+            return 0 <= offset && offset < count
+                ? readOnlyList[offset].Some()
+                : Option.None<TSource>();
+        }
+
+        if (index.IsFromEnd)
+        {
+#if NET6_0_OR_GREATER
+            if (source.TryGetNonEnumeratedCount(out var actualCount))
+            {
+                var offset = index.GetOffset(actualCount);
+                return Get(offset);
+            }
+#endif
+            var capacity = index.Value;
+            if (capacity == 0)
+            {
+                return Option.None<TSource>();
+            }
+
+            var buffer = new Queue<TSource>(capacity);
+            foreach (var item in source)
+            {
+                if (buffer.Count == capacity)
+                {
+                    buffer.Dequeue();
+                }
+
+                buffer.Enqueue(item);
+            }
+
+            return buffer.Count == capacity
+                ? buffer.Peek().Some()
+                : Option.None<TSource>();
+        }
+
+        return Get(index.Value);
+
+        Option<TSource> Get(int targetIndex)
+        {
+            if (targetIndex < 0)
+            {
+                return Option.None<TSource>();
+            }
+
+            var itemIndex = 0;
+            foreach (var item in source)
+            {
+                if (itemIndex == targetIndex)
+                {
+                    return item.Some();
+                }
+
+                itemIndex++;
+            }
+
+            return Option.None<TSource>();
+        }
+    }
+#endif
 }
