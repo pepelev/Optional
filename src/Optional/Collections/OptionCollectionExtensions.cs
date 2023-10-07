@@ -413,6 +413,7 @@ public static class OptionCollectionExtensions
     /// <param name="source">The sequence to return the element from.</param>
     /// <param name="index">The index in the sequence.</param>
     /// <returns>An Option&lt;T&gt; instance containing the element if found.</returns>
+    [Pure]
     public static Option<TSource> ElementAtOrNone<TSource>([InstantHandle] this IEnumerable<TSource> source, int index)
     {
         if (source == null)
@@ -469,6 +470,7 @@ public static class OptionCollectionExtensions
     /// <param name="source">The sequence to return the element from.</param>
     /// <param name="index">The index in the sequence.</param>
     /// <returns>An Option&lt;T&gt; instance containing the element if found.</returns>
+    [Pure]
     public static Option<TSource> ElementAtOrNone<TSource>(
         [InstantHandle] this IEnumerable<TSource> source,
         Index index)
