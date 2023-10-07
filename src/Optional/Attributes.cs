@@ -26,6 +26,7 @@ internal sealed class PureAttribute : Attribute
 [AttributeUsage(AttributeTargets.Parameter)]
 internal sealed class InstantHandleAttribute : Attribute
 {
+    public bool RequireAwait { get; set; }
 }
 
 /// <summary>
