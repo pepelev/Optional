@@ -422,6 +422,7 @@ public static class OptionCollectionExtensions
         return Option.None<TSource>();
     }
 
+#if !(NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER)
     /// <summary>
     ///     Returns an element at a specified position in a sequence if such exists.
     /// </summary>
@@ -477,7 +478,7 @@ public static class OptionCollectionExtensions
         return Option.None<TSource>();
     }
 
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER
+#else
     /// <summary>
     ///     Returns an element at a specified position in a sequence if such exists.
     /// </summary>
