@@ -17,6 +17,8 @@ public static class AsyncStreamExtensions
     ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
     /// </param>
     /// <returns>A flattened sequence of values.</returns>
+    [Pure]
+    [LinqTunnel]
     public static IAsyncEnumerable<T> Values<T>(
         this IAsyncEnumerable<Option<T>> source,
         bool continueOnCapturedContext = false)
@@ -49,6 +51,8 @@ public static class AsyncStreamExtensions
     ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
     /// </param>
     /// <returns>A flattened sequence of values.</returns>
+    [Pure]
+    [LinqTunnel]
     public static IAsyncEnumerable<T> Values<T, TException>(
         this IAsyncEnumerable<Option<T, TException>> source,
         bool continueOnCapturedContext = false)
@@ -81,6 +85,8 @@ public static class AsyncStreamExtensions
     ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
     /// </param>
     /// <returns>A flattened sequence of exceptional values.</returns>
+    [Pure]
+    [LinqTunnel]
     public static IAsyncEnumerable<TException> Exceptions<T, TException>(
         this IAsyncEnumerable<Option<T, TException>> source,
         bool continueOnCapturedContext = false)
@@ -113,6 +119,7 @@ public static class AsyncStreamExtensions
     ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
     /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the first element if present.</returns>
+    [Pure]
     public static async Task<Option<TSource>> FirstOrNoneAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         CancellationToken token = default,
@@ -140,6 +147,7 @@ public static class AsyncStreamExtensions
     ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
     /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the last element if present.</returns>
+    [Pure]
     public static async Task<Option<TSource>> LastOrNoneAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         CancellationToken token = default,
@@ -169,6 +177,7 @@ public static class AsyncStreamExtensions
     ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
     /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the element if present.</returns>
+    [Pure]
     public static async Task<Option<TSource>> SingleOrNoneAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         CancellationToken token = default,
@@ -203,6 +212,7 @@ public static class AsyncStreamExtensions
     ///     The argument of <see cref="TaskAsyncEnumerableExtensions.ConfigureAwait"/>.
     /// </param>
     /// <returns>An Option&lt;T&gt; instance containing the element if found.</returns>
+    [Pure]
     public static async Task<Option<TSource>> ElementAtOrNoneAsync<TSource>(
         this IAsyncEnumerable<TSource> source,
         Index index,
