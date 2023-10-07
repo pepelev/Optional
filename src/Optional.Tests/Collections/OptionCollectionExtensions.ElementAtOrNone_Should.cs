@@ -4,7 +4,7 @@ using static Optional.Tests.Cases;
 
 namespace Optional.Tests.Collections;
 
-public static class OptionCollectionExtensions
+public static partial class OptionCollectionExtensions
 {
     public sealed class ElementAtOrNone_Should
     {
