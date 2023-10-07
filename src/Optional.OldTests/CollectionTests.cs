@@ -283,7 +283,9 @@ namespace Optional.Tests
 
         private void ElementAtOperator(IEnumerable<int> full, IEnumerable<int> single, IEnumerable<int> empty)
         {
+#if NET35_OR_GREATER
             Assert.IsFalse(full.ElementAtOrNone(-1).HasValue);
+#endif
             Assert.IsFalse(full.ElementAtOrNone(full.Count()).HasValue);
 
             for (var i = 0; i < full.Count(); i++)
@@ -294,7 +296,9 @@ namespace Optional.Tests
 
             Assert.IsTrue(single.ElementAtOrNone(0).HasValue);
             Assert.IsFalse(single.ElementAtOrNone(2).HasValue);
+#if NET35_OR_GREATER
             Assert.IsFalse(single.ElementAtOrNone(-1).HasValue);
+#endif
             Assert.AreEqual(single.ElementAtOrNone(0).ValueOr(-1), single.Single());
 
             Assert.IsFalse(empty.ElementAtOrNone(0).HasValue);
