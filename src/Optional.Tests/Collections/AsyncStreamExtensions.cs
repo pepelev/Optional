@@ -2,6 +2,8 @@ namespace Optional.Tests.Collections;
 
 public static partial class AsyncStreamExtensions
 {
+    private static IComparer<int> ByLastDigit => Comparation.Order.Of<int>().By(number => number % 10);
+
     private static async Task AssertThrowsBeforeAsync<T>(this IAsyncEnumerable<T> sequence, int index)
     {
         using var tokenSource = new CancellationTokenSource();

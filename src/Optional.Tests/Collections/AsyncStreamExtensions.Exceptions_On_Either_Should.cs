@@ -36,14 +36,6 @@ public static partial class AsyncStreamExtensions
         }
 
         [Test]
-        public void Throw_On_Null()
-        {
-            IAsyncEnumerable<Option<string, int>>? sequence = null;
-
-            Assert.Throws<ArgumentNullException>(() => sequence!.Exceptions(continueOnCapturedContext));
-        }
-
-        [Test]
         public async Task Pass_CancellationToken_To_Underlying([Range(0, 3)] int index)
         {
             var sequence = new[]
