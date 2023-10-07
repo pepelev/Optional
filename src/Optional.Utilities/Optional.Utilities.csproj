@@ -10,14 +10,6 @@
         <NoWarn>1591</NoWarn>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
-        <DefineConstants>NETSTANDARD10</DefineConstants>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(TargetFramework)' != 'net35' ">
-        <DefineConstants>NET40PLUS</DefineConstants>
-    </PropertyGroup>
-
     <ItemGroup>
         <ProjectReference Include="..\Optional\Optional.csproj"/>
     </ItemGroup>
