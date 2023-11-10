@@ -665,4 +665,11 @@ public struct Option<T, TException> : IEquatable<Option<T, TException>>, ICompar
             ? Option.None<T, TException>(exceptionFactory())
             : this;
     }
+
+    /// <summary>
+    ///     Swaps value and exceptional value.
+    /// </summary>
+    /// <returns>The swapped optional.</returns>
+    [Pure]
+    public Option<TException, T> Swap() => new(exception, value, !HasValue);
 }
