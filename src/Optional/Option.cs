@@ -10,6 +10,7 @@ public static class Option
     /// </summary>
     /// <param name="value">The value to be wrapped.</param>
     /// <returns>An optional containing the specified value.</returns>
+    [Pure]
     public static Option<T> Some<T>(T value) => new(value, true);
 
     /// <summary>
@@ -17,6 +18,7 @@ public static class Option
     /// </summary>
     /// <param name="value">The value to be wrapped.</param>
     /// <returns>An optional containing the specified value.</returns>
+    [Pure]
     public static Option<T, TException> Some<T, TException>(T value) =>
         new(value, exception: default!, hasValue: true);
 
@@ -24,6 +26,7 @@ public static class Option
     ///     Creates an empty Option&lt;T&gt; instance.
     /// </summary>
     /// <returns>An empty optional.</returns>
+    [Pure]
     public static Option<T> None<T>() => new(value: default!, hasValue: false);
 
     /// <summary>
@@ -32,6 +35,7 @@ public static class Option
     /// </summary>
     /// <param name="exception">The exceptional value.</param>
     /// <returns>An empty optional.</returns>
+    [Pure]
     public static Option<T, TException> None<T, TException>(TException exception) =>
         new(value: default!, exception, hasValue: false);
 
@@ -44,6 +48,7 @@ public static class Option
     ///     An object that provides culture-specific formatting information about <paramref name="argument" />.
     /// </param>
     /// <returns>An optional containing the parsed value if parsing was successful, an empty one otherwise.</returns>
+    [Pure]
     public static Option<T> Parse<T>(ReadOnlySpan<char> argument, IFormatProvider? formatProvider = null)
         where T : ISpanParsable<T> =>
         T.TryParse(argument, formatProvider, out var result)
@@ -58,6 +63,7 @@ public static class Option
     ///     An object that provides culture-specific formatting information about <paramref name="argument" />.
     /// </param>
     /// <returns>An optional containing the parsed value if parsing was successful, an empty one otherwise.</returns>
+    [Pure]
     public static Option<T> Parse<T>(string? argument, IFormatProvider? formatProvider = null)
         where T : IParsable<T> =>
         T.TryParse(argument, formatProvider, out var result)

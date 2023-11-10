@@ -65,6 +65,18 @@ public static class OptionExtensions
 
     /// <summary>
     ///     Creates an Option&lt;T&gt; instance from a specified value.
+    ///     If the condition is false, an empty optional is returned.
+    /// </summary>
+    /// <param name="value">The value to wrap.</param>
+    /// <param name="condition">The wrap condition.</param>
+    /// <returns>An optional containing the specified value.</returns>
+    [Pure]
+    public static Option<T> SomeWhen<T>(this T value, bool condition) => condition
+        ? Option.Some(value)
+        : Option.None<T>();
+
+    /// <summary>
+    ///     Creates an Option&lt;T&gt; instance from a specified value.
     ///     If the value does not satisfy the given predicate,
     ///     an empty optional is returned, with a specified exceptional value.
     /// </summary>
