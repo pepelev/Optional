@@ -104,4 +104,27 @@ public static class OptionLinqExtensions
 
         return source.FlatMap(src => collectionSelector(src).Map(elem => resultSelector(src, elem)));
     }
+
+#if NETSTANDARD2_0_OR_GREATER || NETCOREAPP2_0_OR_GREATER
+    [Pure]
+    public static Option<TSource, TException> Where<TSource, TException>(
+        this Option<TSource, TException> source,
+        [InstantHandle] Func<TSource, (bool Match, TException Exception)> predicate)
+    {
+        if (predicate == null)
+        {
+            throw new ArgumentNullException(nameof(predicate));
+        }
+
+        if (!source.HasValue)
+        {
+            return source;
+        }
+
+        var (match, exception) = predicate(source.Value);
+        return match
+            ? source
+            : Option.None<TSource, TException>(exception);
+    }
+#endif
 }
