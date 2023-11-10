@@ -39,6 +39,39 @@ public sealed class Optional_Either_Should
         result.Should().Be(Option.None<int, string>("Could not get value"));
     }
 
+    [Test]
+    public void Pass_Value_When_InvertedPredicate_Not_Match_On_Where()
+    {
+        var result =
+            from a in Option.Some<int, string>(42)
+            where "more than 50".SomeWhen(a > 50)
+            select a;
+
+        result.Should().Be(Option.Some<int, string>(42));
+    }
+
+    [Test]
+    public void Use_Exception_When_InvertedPredicate_Match_On_Where()
+    {
+        var result =
+            from a in Option.Some<int, string>(42)
+            where "more than 30".SomeWhen(a > 30)
+            select a;
+
+        result.Should().Be(Option.None<int, string>("more than 30"));
+    }
+
+    [Test]
+    public void Left_Exception_Value_As_Is_For_InvertedPredicate_On_Where()
+    {
+        var result =
+            from a in Option.None<int, string>("Could not get value")
+            where "more than 75".SomeWhen(a > 75)
+            select a;
+
+        result.Should().Be(Option.None<int, string>("Could not get value"));
+    }
+
     #endregion
 
     #region Swap

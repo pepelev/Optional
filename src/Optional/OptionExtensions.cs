@@ -65,7 +65,7 @@ public static class OptionExtensions
 
     /// <summary>
     ///     Creates an Option&lt;T&gt; instance from a specified value.
-    ///     If the <see cref="condition"/> is false, an empty optional is returned.
+    ///     If the condition is false, an empty optional is returned.
     /// </summary>
     /// <param name="value">The value to wrap.</param>
     /// <param name="condition">The wrap condition.</param>

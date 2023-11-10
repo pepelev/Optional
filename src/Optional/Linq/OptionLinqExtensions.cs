@@ -127,4 +127,25 @@ public static class OptionLinqExtensions
             : Option.None<TSource, TException>(exception);
     }
 #endif
+
+    [Pure]
+    public static Option<TSource, TException> Where<TSource, TException>(
+        this Option<TSource, TException> source,
+        [InstantHandle] Func<TSource, Option<TException>> invertedPredicate)
+    {
+        if (invertedPredicate == null)
+        {
+            throw new ArgumentNullException(nameof(invertedPredicate));
+        }
+
+        if (!source.HasValue)
+        {
+            return source;
+        }
+
+        var exception = invertedPredicate(source.Value);
+        return exception.HasValue
+            ? Option.None<TSource, TException>(exception.Value)
+            : source;
+    }
 }
